@@ -1,0 +1,7 @@
+# Getting Started
+1. Download MAMP (https://www.mamp.info/en/mac/) and use free version
+2. Run with this repo as the home folder
+3. Install Dropbox sync app (https://www.dropbox.com/install)
+4. Make Dropbox files locally
+5. Change Dropbox preferences to Sync into htdocs folder for MAMP
+6. Change AJAX url to be source .xml file (must be XML format)
