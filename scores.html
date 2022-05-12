@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Dev Nationals Scores</title>
+        <style>
+            html, body {
+                margin: 0;
+            }
+            body {
+                background: black;
+            }
+            .bar {
+                position: absolute;
+                bottom: 0;
+                background: #001545;
+                height: 68px;
+                width: 100%;
+            }
+            .title {
+                font-family: "Arial Black";
+                font-size: 50px;
+                letter-spacing: -1px;
+                color: white;
+                text-transform: uppercase;
+                margin-top: -3px;
+                margin-left: 28px;
+                width: 450px;
+            }
+            .name {
+                font-family: "Arial";
+                font-size: 50px;
+                letter-spacing: -1px;
+                color: white;
+            }
+            .score {
+                margin-top: 4px;
+                margin-left: auto;
+                margin-right: 28px;
+                font-family: "Arial";
+                font-size: 50px;
+                letter-spacing: -1px;
+                color: white;
+            }
+
+            /* Events */
+            .event {
+                display: flex;
+                align-items: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="bar">
+            <div class="events">
+                <div class="event floor">
+                    <div class="title">FLOOR</div>
+                    <div class="name"></div>
+                    <div class="score"></div>
+                </div>
+                <div class="event pommel">
+                    <div class="title">POMMEL</div>
+                    <div class="name"></div>
+                    <div class="score"></div>
+                </div>
+                <div class="event rings">
+                    <div class="title">RINGS</div>
+                    <div class="name"></div>
+                    <div class="score"></div>
+                </div>
+                <div class="event vault">
+                    <div class="title">VAULT</div>
+                    <div class="name"></div>
+                    <div class="score"></div>
+                </div>
+                <div class="event p-bars">
+                    <div class="title">P BARS</div>
+                    <div class="name"></div>
+                    <div class="score"></div>
+                </div>
+                <div class="event h-bar">
+                    <div class="title">H BAR</div>
+                    <div class="name"></div>
+                    <div class="score"></div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="./jquery.easy-ticker.js"></script>
+        <script>
+            $('.bar').easyTicker({
+                direction: 'up',
+                easing: 'swing',
+                speed: 'slow',
+                interval: 8000,
+                height: 'auto',
+                visible: 1,
+                mousePause: false,
+                controls: {
+                    up: '',
+                    down: '',
+                    toggle: '',
+                    playText: 'Play',
+                    stopText: 'Stop'
+                },
+                callbacks: {
+                    before: false,
+                    after: function(){
+                        var activeItem = $(".events").find('.event').first();
+                        var activeItemTitle = activeItem.find('.title').text();
+
+                        $.ajax({
+                            type: "GET" ,
+                            url: "./Sample1.xml" ,
+                            cache: false,
+                            dataType: "xml" ,
+                            success: function(xml) {
+                                $(xml).find('event').each(function(){
+                                    var title = $(this).attr('title');
+                                    var name = $(this).attr('name');
+                                    var score = $(this).attr('score');
+
+                                    if (title == "FLOOR" && activeItemTitle != "FLOOR") {
+                                        $(".floor").find('.name').text(name);
+                                        $(".floor").find('.score').text(score);
+                                    }
+                                    if (title == "POMMEL" && activeItemTitle != "POMMEL") {
+                                        $(".pommel").find('.name').text(name);
+                                        $(".pommel").find('.score').text(score);
+                                    }
+                                    if (title == "RINGS" && activeItemTitle != "RINGS") {
+                                        $(".rings").find('.name').text(name);
+                                        $(".rings").find('.score').text(score);
+                                    }
+                                    if (title == "VAULT" && activeItemTitle != "VAULT") {
+                                        $(".vault").find('.name').text(name);
+                                        $(".vault").find('.score').text(score);
+                                    }
+                                    if (title == "P BARS" && activeItemTitle != "P BARS") {
+                                        $(".p-bars").find('.name').text(name);
+                                        $(".p-bars").find('.score').text(score);
+                                    }
+                                    if (title == "H BAR" && activeItemTitle != "H BAR") {
+                                        $(".h-bar").find('.name').text(name);
+                                        $(".h-bar").find('.score').text(score);
+                                    }
+                                }); 
+                            }       
+                        });
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
