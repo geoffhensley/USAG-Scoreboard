@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Dev Nationals Scores</title>
+        <style>
+            html, body {
+                margin: 0;
+            }
+            body {
+                background: black;
+            }
+            .bar {
+                display: flex;
+                justify-content: space-between;
+                background-color: white;
+                position: absolute;
+                display: flex;
+                justify-content: stretch;
+                bottom: 0;
+                width: 100%;
+            }
+            .live {
+                background :#001545;
+                display: inline;
+                font-family: "Arial Black";
+                font-size: 32px;
+                letter-spacing: -1px;
+                line-height: 25px;
+                color: white;
+                text-transform: uppercase;
+                text-align: center;
+                padding: 10px 25px;
+                padding-top: 15px;
+            }
+            .teams {
+                width: 100%;
+                display: flex;
+                justify-content: space-evenly;
+                gap: 10px 20px;
+                padding-left: 20px;
+                padding-right: 15px;
+            }
+            .team {
+                display: relative;;
+                flex-grow: 1;
+                flex-shrink: 1;
+                flex-basis: 0;
+                padding: 10px;
+                background: white;
+                border: white 2px solid;
+                color: #001545;
+            }
+            .title {
+                align-self: flex-end;
+                font-family: "Arial";
+                font-size: 32px;
+                letter-spacing: -1px;
+                line-height: 25px;
+                text-transform: uppercase;
+                margin-top: 6px;
+                padding-right: 10px;
+            }
+            .name {
+                font-family: "Arial";
+                font-size: 23px;
+                letter-spacing: -1px;
+                white-space: nowrap;
+                overflow: hidden;
+            }
+            .score {
+                font-family: "Arial Black";
+                font-size: 28px;
+                letter-spacing: -1px;
+                text-transform: uppercase;
+                line-height: 26px;
+            }
+
+
+            .logo {
+                float: right;
+                background: white;
+                display: flex;
+                align-items: center;
+                padding-right: 25px;
+            }
+
+            /* Events */
+            .event {
+                display: flex;
+                align-items: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="bar">
+            <div class="live">
+                <em>Live<br>Results</em>
+            </div>
+            <div class="teams">
+                <div class="team one">
+                    <div class="name"></div>
+                    <div class="score"></div>
+                </div>
+                <div class="team two">
+                    <div class="name"></div>
+                    <div class="score"></div>
+                </div>
+                <div class="team three">
+                    <div class="name"></div>
+                    <div class="score"></div>
+                </div>
+                <div class="team four">
+                    <div class="name"></div>
+                    <div class="score"></div>
+                </div>
+                <div class="team five">
+                    <div class="name"></div>
+                    <div class="score"></div>
+                </div>
+                <div class="team six">
+                    <div class="name"></div>
+                    <div class="score"></div>
+                </div>
+            </div>
+            <div class="logo">
+                <img src="./gym-act-logo.jpg" height="65px">
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function(){
+                setInterval(fetchdata, 6000);
+            });
+
+            function fetchdata(){
+                console.log('fetch');
+                $.ajax({
+                    type: "GET" ,
+                    url: "./Sync/Dropbox/Dev Nationals Scoring/Men.xml" ,
+                    cache: false,
+                    dataType: "xml" ,
+                    success: function(xml) {
+                        $(xml).find('leader:first').each(function(){
+                            $(this).find("line").each(function(){
+                                var rank = $(this).attr('linenum');
+                                var team = $(this).attr('name');
+                                var score = $(this).attr('score');
+
+                                teamBuild(team, rank, score);
+
+                                console.log(team, rank);
+                            });
+                        }); 
+                    }       
+                });
+            }
+
+            function teamBuild($team, $rank, $score) {
+                if($rank == "1") {
+                    $(".one").find(".name").text($team);
+                    $(".one").find(".score").text($score);
+                }
+                if($rank == "2") {
+                    $(".two").find(".name").text($team);
+                    $(".two").find(".score").text($score);
+                }
+                if($rank == "3") {
+                    $(".three").find(".name").text($team);
+                    $(".three").find(".score").text($score);
+                }
+                if($rank == "4") {
+                    $(".four").find(".name").text($team);
+                    $(".four").find(".score").text($score);
+                }
+                if($rank == "5") {
+                    $(".five").find(".name").text($team);
+                    $(".five").find(".score").text($score);
+                }
+                if($rank == "6") {
+                    $(".six").find(".name").text($team);
+                    $(".six").find(".score").text($score);
+                }
+            }
+        </script>
+    </body>
+</html>
