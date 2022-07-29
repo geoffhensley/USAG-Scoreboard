@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<scoring>
+   <events>
+      <event eventnum="1" title="VAULT" num="" name="" gym="" score="" dscore="" escore="" nd="" />
+      <event eventnum="2" title="BARS" num="" name="" gym="" score="" dscore="" escore="" nd="" />
+      <event eventnum="3" title="BEAM" num="" name="" gym="" score="" dscore="" escore="" nd="" />
+      <event eventnum="4" title="FLOOR" num="" name="" gym="" score="" dscore="" escore="" nd="" />
+      <event eventnum="5" title="" num="" name="" gym="" score="" dscore="" escore="" nd="" />
+      <event eventnum="6" title="" num="" name="" gym="" score="" dscore="" escore="" nd="" />
+   </events>
+   <leaders>
+      <leader leadernum="1" title1="" title2="" >
+         <line linenum="1" rank="" name="" gym="" score="" />
+         <line linenum="2" rank="" name="" gym="" score="" />
+         <line linenum="3" rank="" name="" gym="" score="" />
+         <line linenum="4" rank="" name="" gym="" score="" />
+         <line linenum="5" rank="" name="" gym="" score="" />
+         <line linenum="6" rank="" name="" gym="" score="" />
+         <line linenum="7" rank="" name="" gym="" score="" />
+         <line linenum="8" rank="" name="" gym="" score="" />
+      </leader>
+      <leader leadernum="2" title1="" title2="" >
+         <line linenum="1" rank="" name="" gym="" score="" />
+         <line linenum="2" rank="" name="" gym="" score="" />
+         <line linenum="3" rank="" name="" gym="" score="" />
+         <line linenum="4" rank="" name="" gym="" score="" />
+         <line linenum="5" rank="" name="" gym="" score="" />
+         <line linenum="6" rank="" name="" gym="" score="" />
+         <line linenum="7" rank="" name="" gym="" score="" />
+         <line linenum="8" rank="" name="" gym="" score="" />
+      </leader>
+      <leader leadernum="3" title1="" title2="" >
+         <line linenum="1" rank="" name="" gym="" score="" />
+         <line linenum="2" rank="" name="" gym="" score="" />
+         <line linenum="3" rank="" name="" gym="" score="" />
+         <line linenum="4" rank="" name="" gym="" score="" />
+         <line linenum="5" rank="" name="" gym="" score="" />
+         <line linenum="6" rank="" name="" gym="" score="" />
+         <line linenum="7" rank="" name="" gym="" score="" />
+         <line linenum="8" rank="" name="" gym="" score="" />
+      </leader>
+   </leaders>
+   <ncaacycle team="" event="" eventscore="" teamscore="" >
+      <lineup order="1" name="" score="" />
+      <lineup order="2" name="" score="" />
+      <lineup order="3" name="" score="" />
+      <lineup order="4" name="" score="" />
+      <lineup order="5" name="" score="" />
+      <lineup order="6" name="" score="" />
+   </ncaacycle>
+   <ncaamatrix evtitle1="" evshort1="" evtitle2="" evshort2="" evtitle3="" evshort3="" evtitle4="" evshort4="" evtitle5="" evshort5="" evtitle6="" evshort6="" >
+      <line linenum="1" rank="" gym="" teamscore="" evscore1="" evscore2="" evscore3="" evscore4="" evscore5="" evscore6="" />
+      <line linenum="2" rank="" gym="" teamscore="" evscore1="" evscore2="" evscore3="" evscore4="" evscore5="" evscore6="" />
+      <line linenum="3" rank="" gym="" teamscore="" evscore1="" evscore2="" evscore3="" evscore4="" evscore5="" evscore6="" />
+      <line linenum="4" rank="" gym="" teamscore="" evscore1="" evscore2="" evscore3="" evscore4="" evscore5="" evscore6="" />
+      <line linenum="5" rank="" gym="" teamscore="" evscore1="" evscore2="" evscore3="" evscore4="" evscore5="" evscore6="" />
+      <line linenum="6" rank="" gym="" teamscore="" evscore1="" evscore2="" evscore3="" evscore4="" evscore5="" evscore6="" />
+      <line linenum="7" rank="" gym="" teamscore="" evscore1="" evscore2="" evscore3="" evscore4="" evscore5="" evscore6="" />
+      <line linenum="8" rank="" gym="" teamscore="" evscore1="" evscore2="" evscore3="" evscore4="" evscore5="" evscore6="" />
+   </ncaamatrix>
+</scoring>

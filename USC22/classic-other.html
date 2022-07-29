@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>U.S. Classic Scores</title>
+        <style>
+            @font-face {
+                font-family: "Mont Heavy";
+                src: url("./fonts/Mont Heavy.otf");
+            }
+            @font-face {
+                font-family: "Poppins";
+                src: url("./fonts/Poppins-Regular.ttf");
+            }
+
+            html, body {
+                margin: 0;
+            }
+            body {
+                background-image: url(./images/standings-blank.jpg);
+                background-position: top right;
+                background-repeat: no-repeat;
+            }
+
+            /* Right Column */
+            .event-list {
+                position: absolute;
+                left: 990px;
+                top: 60px;
+                width: 910px;
+            }
+            .event {
+                margin-bottom: 30px;
+            }
+            .event-top {
+                display: block;
+                margin-bottom: 20px;
+            }
+            .event-title {
+                font-size: 38pt;
+                color: white;
+                font-family: "Poppins";
+                margin-bottom: 20px;
+                display: inline;
+                color: #EA0D44;
+                text-align: center;
+                font-family: "Mont Heavy";
+                font-weight: 900;
+                text-transform: uppercase;
+                background: white;
+                padding: 8px 15px 0;
+            }
+            .event-name {
+                font-family: "Mont Heavy";
+                color: white;
+                font-size: 44pt;
+                line-height: 48pt;
+                float: left;
+            }
+            .event-score {
+                float: right;
+                font-family: "Poppins";
+                font-weight: 900;
+                color: white;
+                font-size: 46pt;
+                line-height: 46px;
+            }
+            .scores {
+                display: block;
+                margin-top: 8px;
+                font-family: "Poppins";
+                color: white;
+                font-size: 36pt;
+                line-height: 18pt;
+                margin-bottom: 70px;
+            }
+                .score-d, .score-b, .score-e, .score-nd {
+                    display: inline-block;
+                    margin-right: 40px;
+                }
+        </style>
+    </head>
+    <body>
+        <div class="right">
+            <div class="event-list"></div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script>
+            var activeItem = $(".events").find('.event').first();
+            var activeItemTitle = activeItem.find('.title').text();
+
+            function runResults(){
+                $.ajax({
+                    type: "GET" ,
+                    url: "./USClassic.xml" ,
+                    cache: false,
+                    dataType: "xml" ,
+                    success: function(xml) {
+                        // Empty out the event list on initital refresh
+                        $(".event-list").empty();
+
+                        // Left column - Title
+                        $(xml).find('leader').first().each(function(){
+                            var titleL = $(this).attr('title1');
+                            var titleR = $(this).attr('title2');
+                            $(".titleL").text(titleL);
+                            $(".titleR").text(titleR);
+                        });
+
+                        // Left column - Leaderboard (8 at a time)
+                        $(xml).find('leader').first().find('line').each(function(){
+                            var leaderName = $(this).attr('name');
+                            var leaderScore = $(this).attr('score');
+                            var position = $(this).attr('rank');
+
+                            if(position == "1"){
+                                $(".leader1-name").text(leaderName);
+                                $(".leader1-score").text(leaderScore);
+                            }
+                            if(position == "2"){
+                                $(".leader2-name").text(leaderName);
+                                $(".leader2-score").text(leaderScore);
+                            }
+                            if(position == "3"){
+                                $(".leader3-name").text(leaderName);
+                                $(".leader3-score").text(leaderScore);
+                            }
+                            if(position == "4"){
+                                $(".leader4-name").text(leaderName);
+                                $(".leader4-score").text(leaderScore);
+                            }
+                            if(position == "5"){
+                                $(".leader5-name").text(leaderName);
+                                $(".leader5-score").text(leaderScore);
+                            }
+                            if(position == "6"){
+                                $(".leader6-name").text(leaderName);
+                                $(".leader6-score").text(leaderScore);
+                            }
+                            if(position == "7"){
+                                $(".leader7-name").text(leaderName);
+                                $(".leader7-score").text(leaderScore);
+                            }
+                            if(position == "8"){
+                                $(".leader8-name").text(leaderName);
+                                $(".leader8-score").text(leaderScore);
+                            }
+                        });
+
+                        // Right column
+                        $(xml).find('event').each(function(){
+                            var title = $(this).attr('title');
+                            var name = $(this).attr('name');
+                            var score = $(this).attr('score');
+                            var dscore = $(this).attr('dscore');
+                            var escore = $(this).attr('escore');
+                            var bonus = $(this).attr('bonus');
+                            var nd = $(this).attr('nd');
+                            if (title) {
+                                $(".event-list").append("<div class='event'><div class='event-title'>" + title + "</div><div class='event-top'><div class='event-name'>" + ( name ? name : '&nbsp;' ) + "</div><div class='event-score'>" + score + "</div><br><br><br><br></div><div class='scores'><div class='score-d'><strong>D:</strong> "+ dscore +"</div> " + (bonus ? "<div class='score-b'><strong>B:</strong> " + bonus + "</div>" : "") + "<div class='score-e'><strong>E:</strong> "+ escore +"</div><div class='score-nd'><strong>ND:</strong> "+ nd +"</div></div></div>");
+                            }
+                        }); 
+                    }       
+                });
+            }
+
+            setInterval(runResults,1000);
+        </script>
+    </body>
+</html>
