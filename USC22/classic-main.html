@@ -16,19 +16,21 @@
 
             html, body {
                 margin: 0;
+                overflow: hidden;
             }
             body {
-                background-image: url(./images/standings.jpg);
+                background-image: url(./images/standings-new.jpg);
                 background-repeat: no-repeat;
             }
 
             .titles {
                 position: absolute;
                 left: 20px;
-                top: 140px;
-                width: 780px;
-                font-size: 52pt;
-                color: #EA0D44;
+                top: 45px;
+                width: 690px;
+                min-height: 72px;
+                font-size: 44pt;
+                color: #121C4E;
                 text-align: center;
                 font-family: "Mont Heavy";
                 font-weight: 900;
@@ -46,6 +48,7 @@
                 }
             .leader-row {
                 display: block;
+                margin-bottom: 25px;
             }
             .leader-row > * {
                 display: inline-block;
@@ -54,9 +57,9 @@
             .leaders {
                 display: block;
                 position: absolute;
-                top: 230px;
+                top: 150px;
                 left: 20px;
-                width: 780px;
+                width: 840px;
                 font-family: "Mont Heavy";
                 color: white;
                 font-size: 48pt;
@@ -73,52 +76,6 @@
                 margin-bottom: 14px;
                 font-size: 50pt;
             }
-
-            /* Right Column */
-            .event-list {
-                position: absolute;
-                left: 1230px;
-                top: 60px;
-                width: 660px;
-            }
-            .event {
-                margin-bottom: 42px;
-            }
-            .event-top {
-                display: block;
-            }
-            .event-title {
-                font-size: 30pt;
-                color: #121c4e;
-                font-family: "Poppins";
-                line-height: 30pt;
-                margin-bottom: 10px;
-            }
-            .event-name {
-                font-family: "Mont Heavy";
-                color: white;
-                font-size: 34pt;
-                line-height: 32pt;
-                float: left;
-            }
-            .event-score {
-                float: right;
-                font-family: "Mont Heavy";
-                color: white;
-                font-size: 26pt;
-            }
-            .scores {
-                display: block;
-                margin-top: 15px;
-                font-family: "Poppins";
-                color: white;
-                font-size: 20pt;
-                line-height: 18pt;
-            }
-                .score-d, .score-b, .score-e, .score-nd {
-                    display: inline-block;
-                    margin-right: 15px;
-                }
         </style>
     </head>
     <body>
@@ -233,8 +190,8 @@
                     }       
                 });
             }
-
-            setInterval(runResults,1000);
+           setInterval(runResults,1000);
+           //runResults();
         </script>
     </body>
 </html>

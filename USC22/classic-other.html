@@ -12,12 +12,17 @@
                 font-family: "Poppins";
                 src: url("./fonts/Poppins-Regular.ttf");
             }
+            @font-face {
+                font-family: "Poppins Bold";
+                src: url("./fonts/Poppins-Bold.ttf");
+            }
 
             html, body {
                 margin: 0;
+                overflow: hidden;
             }
             body {
-                background-image: url(./images/standings-blank.jpg);
+                background-image: url(./images/standings-new.jpg);
                 background-position: top right;
                 background-repeat: no-repeat;
             }
@@ -25,24 +30,28 @@
             /* Right Column */
             .event-list {
                 position: absolute;
-                left: 990px;
+                right: 80px;
                 top: 60px;
                 width: 910px;
             }
             .event {
-                margin-bottom: 30px;
+                margin-bottom: 40px;
             }
             .event-top {
                 display: block;
-                margin-bottom: 20px;
+                margin-top: 10px;
             }
+                .event-top:after {
+                    content: "";
+                    display: block;
+                    clear: both;
+                }
             .event-title {
                 font-size: 38pt;
                 color: white;
                 font-family: "Poppins";
-                margin-bottom: 20px;
                 display: inline;
-                color: #EA0D44;
+                color: #121C4E;
                 text-align: center;
                 font-family: "Mont Heavy";
                 font-weight: 900;
@@ -59,24 +68,28 @@
             }
             .event-score {
                 float: right;
-                font-family: "Poppins";
-                font-weight: 900;
+                font-family: "Poppins Bold";
                 color: white;
-                font-size: 46pt;
-                line-height: 46px;
+                font-size: 44pt;
+                line-height: 44px;
             }
             .scores {
                 display: block;
                 margin-top: 8px;
                 font-family: "Poppins";
                 color: white;
-                font-size: 36pt;
-                line-height: 18pt;
-                margin-bottom: 70px;
+                font-size: 38pt;
+                line-height: 34pt;
+                margin-bottom: 52px;
             }
+                .scores:after {
+                    content: "";
+                    display: block;
+                    clear: both;
+                }
                 .score-d, .score-b, .score-e, .score-nd {
                     display: inline-block;
-                    margin-right: 40px;
+                    width: 32%;
                 }
         </style>
     </head>
@@ -158,13 +171,13 @@
                             var bonus = $(this).attr('bonus');
                             var nd = $(this).attr('nd');
                             if (title) {
-                                $(".event-list").append("<div class='event'><div class='event-title'>" + title + "</div><div class='event-top'><div class='event-name'>" + ( name ? name : '&nbsp;' ) + "</div><div class='event-score'>" + score + "</div><br><br><br><br></div><div class='scores'><div class='score-d'><strong>D:</strong> "+ dscore +"</div> " + (bonus ? "<div class='score-b'><strong>B:</strong> " + bonus + "</div>" : "") + "<div class='score-e'><strong>E:</strong> "+ escore +"</div><div class='score-nd'><strong>ND:</strong> "+ nd +"</div></div></div>");
+                                $(".event-list").append("<div class='event'><div class='event-title'>" + title + "</div><div class='event-top'><div class='event-name'>" + ( name ? name : '&nbsp;' ) + "</div><div class='event-score'>" + score + "</div></div><div class='scores'><div class='score-d'><strong>D:</strong> "+ dscore +"</div> " + (bonus ? "<div class='score-b'><strong>B:</strong> " + bonus + "</div>" : "") + "<div class='score-e'><strong>E:</strong> "+ escore +"</div><div class='score-nd'><strong>ND:</strong> "+ nd +"</div></div></div>");
                             }
                         }); 
                     }       
                 });
             }
-
+            // runResults();
             setInterval(runResults,1000);
         </script>
     </body>
