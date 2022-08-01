@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Scoreboard - U.S. Classic</title>
+        <style>
+            @font-face {
+                font-family: "Mont Heavy";
+                src: url("./fonts/Mont Heavy.otf");
+            }
+            @font-face {
+                font-family: "Poppins";
+                src: url("./fonts/Poppins-Regular.ttf");
+            }
+            @font-face {
+                font-family: "Poppins Bold";
+                src: url("./fonts/Poppins-Bold.ttf");
+            }
+
+            html, body {
+                margin: 0;
+                overflow: hidden;
+            }
+            body {
+                background-image: url(./images/standings-new.jpg);
+                background-position: top right;
+                background-repeat: no-repeat;
+            }
+
+            /* Right Column */
+            .event-list {
+                position: absolute;
+                right: 80px;
+                top: 60px;
+                width: 910px;
+            }
+            .event {
+                margin-bottom: 40px;
+            }
+            .event-top {
+                display: block;
+                margin-top: 10px;
+            }
+                .event-top:after {
+                    content: "";
+                    display: block;
+                    clear: both;
+                }
+            .event-title {
+                font-size: 38pt;
+                color: white;
+                font-family: "Poppins";
+                display: inline;
+                color: #121C4E;
+                text-align: center;
+                font-family: "Mont Heavy";
+                font-weight: 900;
+                text-transform: uppercase;
+                background: white;
+                padding: 8px 15px 0;
+            }
+            .event-name {
+                font-family: "Mont Heavy";
+                color: white;
+                font-size: 44pt;
+                line-height: 48pt;
+                float: left;
+            }
+            .event-score {
+                float: right;
+                font-family: "Poppins Bold";
+                color: white;
+                font-size: 44pt;
+                line-height: 44px;
+            }
+            .scores {
+                display: block;
+                margin-top: 8px;
+                font-family: "Poppins";
+                color: white;
+                font-size: 38pt;
+                line-height: 34pt;
+                margin-bottom: 52px;
+            }
+                .scores:after {
+                    content: "";
+                    display: block;
+                    clear: both;
+                }
+                .score-d, .score-b, .score-e, .score-nd {
+                    display: inline-block;
+                    width: 32%;
+                }
+        </style>
+    </head>
+    <body>
+        <div class="right">
+            <div class="event-list"></div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script>
+            var activeItem = $(".events").find('.event').first();
+            var activeItemTitle = activeItem.find('.title').text();
+
+            function runResults(){
+                $.getJSON("./scripts/scoreboard.php", function(json){
+                    // Empty out the event list on initital refresh
+                    $(".event-list").empty();
+
+                    // Right column
+                    $.each(json, function(i, item) {
+                        var title = item.event;
+                        var name = item.name;
+                        var score = item.total;
+                        var dscore = item.difficulty;
+                        var escore = item.execution;
+                        var bonus = item.bonus;
+                        var nd = item.deduction;
+                        if (title) {
+                            $(".event-list").append("<div class='event'><div class='event-title'>" + title + "</div><div class='event-top'><div class='event-name'>" + ( name ? name : '&nbsp;' ) + "</div><div class='event-score'>" + score + "</div></div><div class='scores'><div class='score-d'><strong>D:</strong> "+ dscore +"</div> " + (bonus ? "<div class='score-b'><strong>B:</strong> " + bonus + "</div>" : "") + "<div class='score-e'><strong>E:</strong> "+ escore +"</div><div class='score-nd'><strong>ND:</strong> "+ nd +"</div></div></div>");
+                        }
+                    }); 
+                });
+            }
+
+            setInterval(runResults,1000);
+        </script>
+    </body>
+</html>

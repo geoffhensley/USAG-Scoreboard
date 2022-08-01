@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>U.S. Classic Scores</title>
+        <title>Leaderboard - U.S. Classic Scores</title>
         <style>
             @font-face {
                 font-family: "Mont Heavy";
@@ -25,9 +25,9 @@
 
             .titles {
                 position: absolute;
-                left: 20px;
+                left: 30px;
                 top: 45px;
-                width: 690px;
+                width: 680px;
                 min-height: 72px;
                 font-size: 44pt;
                 color: #121C4E;
@@ -58,8 +58,8 @@
                 display: block;
                 position: absolute;
                 top: 150px;
-                left: 20px;
-                width: 840px;
+                left: 30px;
+                width: 830px;
                 font-family: "Mont Heavy";
                 color: white;
                 font-size: 48pt;
@@ -86,32 +86,32 @@
             </div>
             <div class="leaders">
                 <div class="leader-row leader-row-1">
-                    <div class="rank rank-1">1</div>
+                    <div class="rank rank-1"></div>
                     <div class="leader1-name"></div>
                     <div class="score leader1-score"></div>
                 </div>
                 <div class="leader-row leader-row-2">
-                    <div class="rank rank-2">2</div>
+                    <div class="rank rank-2"></div>
                     <div class="leader2-name"></div>
                     <div class="score leader2-score"></div>
                 </div>
                 <div class="leader-row leader-row-3">
-                    <div class="rank rank-3">3</div>
+                    <div class="rank rank-3"></div>
                     <div class="leader3-name"></div>
                     <div class="score leader3-score"></div>
                 </div>
                 <div class="leader-row leader-row-4">
-                    <div class="rank rank-4">4</div>
+                    <div class="rank rank-4"></div>
                     <div class="leader4-name"></div>
                     <div class="score leader4-score"></div>
                 </div>
                 <div class="leader-row leader-row-5">
-                    <div class="rank rank-5">5</div>
+                    <div class="rank rank-5"></div>
                     <div class="leader5-name"></div>
                     <div class="score leader5-score"></div>
                 </div>
                 <div class="leader-row leader-row-6">
-                    <div class="rank rank-6">6</div>
+                    <div class="rank rank-6"></div>
                     <div class="leader6-name"></div>
                     <div class="score leader6-score"></div>
                 </div>
@@ -124,74 +124,65 @@
             var activeItemTitle = activeItem.find('.title').text();
 
             function runResults(){
-                $.ajax({
-                    type: "GET" ,
-                    url: "./USClassic3.xml" ,
-                    cache: false,
-                    dataType: "xml" ,
-                    success: function(xml) {
-                        // Empty out the event list on initital refresh
-                        $(".event-list").empty();
+                $.getJSON("./scripts/leaderboard.php", function(json){
 
-                        // Left column - Title
-                        $(xml).find('leader').first().each(function(){
-                            var titleL = $(this).attr('title1');
-                            var titleR = $(this).attr('title2');
-                            $(".titleL").text(titleL);
-                            $(".titleR").text(titleR);
-                        });
+                    // Empty out the event list on initital refresh
+                    $(".event-list").empty();
 
-                        // Left column - Leaderboard (8 at a time)
-                        $(xml).find('leader').first().find('line').each(function(){
-                            var leaderName = $(this).attr('name');
-                            var leaderScore = $(this).attr('score');
-                            var position = $(this).attr('linenum');
-                            var rank = $(this).attr('rank');
+                    // Left column - Title
+                    $(".titleL").text(json[0].title1);
+                    $(".titleR").text(json[0].title2);
 
-                            if (rank) {
-                                $('.rank-' + position).text(rank);
-                            } else {
-                                $('.rank-' + position).text('');
-                            }
+                    // Left column - Leaderboard (8 at a time)
+                    $.each(json, function(i, item) {
+                        var leaderName = item.name;
+                        var leaderScore = item.score;
+                        var position = item.rank;
+                        var place = item.place;
 
-                            if(position == "1"){
-                                $(".leader1-name").text(leaderName);
-                                $(".leader1-score").text(leaderScore);
-                            }
-                            if(position == "2"){
-                                $(".leader2-name").text(leaderName);
-                                $(".leader2-score").text(leaderScore);
-                            }
-                            if(position == "3"){
-                                $(".leader3-name").text(leaderName);
-                                $(".leader3-score").text(leaderScore);
-                            }
-                            if(position == "4"){
-                                $(".leader4-name").text(leaderName);
-                                $(".leader4-score").text(leaderScore);
-                            }
-                            if(position == "5"){
-                                $(".leader5-name").text(leaderName);
-                                $(".leader5-score").text(leaderScore);
-                            }
-                            if(position == "6"){
-                                $(".leader6-name").text(leaderName);
-                                $(".leader6-score").text(leaderScore);
-                            }
-                            if(position == "7"){
-                                $(".leader7-name").text(leaderName);
-                                $(".leader7-score").text(leaderScore);
-                            }
-                            if(position == "8"){
-                                $(".leader8-name").text(leaderName);
-                                $(".leader8-score").text(leaderScore);
-                            }
-                        });
-                    }       
-                });
+                        if (place) {
+                            $('.rank-' + position).text(place);
+                        } else {
+                            $('.rank-' + position).text('');
+                        }
+
+                        if(position == "1"){
+                            $(".leader1-name").text(leaderName);
+                            $(".leader1-score").text(leaderScore);
+                        }
+                        if(position == "2"){
+                            $(".leader2-name").text(leaderName);
+                            $(".leader2-score").text(leaderScore);
+                        }
+                        if(position == "3"){
+                            $(".leader3-name").text(leaderName);
+                            $(".leader3-score").text(leaderScore);
+                        }
+                        if(position == "4"){
+                            $(".leader4-name").text(leaderName);
+                            $(".leader4-score").text(leaderScore);
+                        }
+                        if(position == "5"){
+                            $(".leader5-name").text(leaderName);
+                            $(".leader5-score").text(leaderScore);
+                        }
+                        if(position == "6"){
+                            $(".leader6-name").text(leaderName);
+                            $(".leader6-score").text(leaderScore);
+                        }
+                        if(position == "7"){
+                            $(".leader7-name").text(leaderName);
+                            $(".leader7-score").text(leaderScore);
+                        }
+                        if(position == "8"){
+                            $(".leader8-name").text(leaderName);
+                            $(".leader8-score").text(leaderScore);
+                        }
+                    });
+                });       
             }
            setInterval(runResults,1000);
-           //runResults();
+           // runResults();
         </script>
     </body>
 </html>

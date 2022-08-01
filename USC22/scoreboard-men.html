@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Scoreboard - Men - U.S. Classic</title>
+        <style>
+            @font-face {
+                font-family: "Mont Heavy";
+                src: url("./fonts/Mont Heavy.otf");
+            }
+            @font-face {
+                font-family: "Poppins";
+                src: url("./fonts/Poppins-Regular.ttf");
+            }
+            @font-face {
+                font-family: "Poppins Bold";
+                src: url("./fonts/Poppins-Bold.ttf");
+            }
+
+            html, body {
+                margin: 0;
+                overflow: hidden;
+            }
+            body {
+                background-image: url(./images/standings-new.jpg);
+                background-position: top right;
+                background-repeat: no-repeat;
+            }
+
+            /* Right Column */
+            .event-list {
+                position: absolute;
+                right: 45px;
+                top: 50px;
+                width: 945px;
+            }
+            .event {
+                margin-bottom: 60px;
+            }
+            .event-top {
+                display: block;
+                margin-bottom: 10px;
+            }
+                .event-top:after {
+                    content: "";
+                    display: block;
+                    clear: both;
+                }
+                .event-title {
+                    display: inline-block;
+                    font-size: 35pt;
+                    color: white;
+                    color: #121C4E;
+                    text-align: center;
+                    font-family: "Mont Heavy";
+                    font-weight: 900;
+                    text-transform: uppercase;
+                    background: white;
+                    padding: 6px 4px 0;
+                    float: left;
+                    margin-top: 2px;
+                    margin-right: 22px;
+                    line-height: 30pt;
+                }
+            .event-name {
+                font-family: "Mont Heavy";
+                color: white;
+                font-size: 45pt;
+                line-height: 45pt;
+                float: left;
+            }
+            .event-score {
+                float: right;
+                font-family: "Poppins Bold";
+                color: white;
+                font-size: 43pt;
+                line-height: 45px;
+                padding-top: 4px;
+            }
+            .scores {
+                display: block;
+                margin-top: 8px;
+                font-family: "Poppins";
+                color: white;
+                font-size: 34pt;
+                line-height: 30pt;
+                margin-bottom: 48px;
+            }
+                .scores:after {
+                    content: "";
+                    display: block;
+                    clear: both;
+                }
+                .score-d, .score-b, .score-e, .score-nd {
+                    display: inline-block;
+                    width: 24%;
+                }
+        </style>
+    </head>
+    <body>
+        <div class="right">
+            <div class="event-list"></div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script>
+            var activeItem = $(".events").find('.event').first();
+            var activeItemTitle = activeItem.find('.title').text();
+
+            function runResults(){
+                $.getJSON("./scripts/scoreboard.php?d=M&s=1", function(json){
+                    // Empty out the event list on initital refresh
+                    $(".event-list").empty();
+
+                    // Right column
+                    $.each(json, function(i, item) {
+                        title = item.event;
+                        if (item.event == "VAULT") { title = "VT"}
+                        if (item.event == "BARS") { title = "UB"}
+                        if (item.event == "BEAM") { title = "BB"}
+                        if (item.event == "FLOOR") { title = "FX"}
+                        if (item.event == "P BARS") { title = "PB"}
+                        if (item.event == "H BAR") { title = "HB"}
+                        if (item.event == "POMMEL") { title = "PH"}
+                        if (item.event == "RINGS") { title = "SR"}
+
+                        var name = item.name;
+                        var score = item.total;
+                        var dscore = item.difficulty;
+                        var escore = item.execution;
+                        var bonus = item.bonus;
+                        
+                        var nd = item.deduction;
+                        if (title) {
+                            $(".event-list").append("<div class='event'><div class='event-top'><div class='event-title'>" + title + "</div><div class='event-name'>" + ( name ? name : '&nbsp;' ) + "</div><div class='event-score'>" + score + "</div></div><div class='scores'><div class='score-d'><strong>D:</strong> "+ dscore +"</div><div class='score-b'><strong>B:</strong> " + bonus + "</div><div class='score-e'><strong>E:</strong> "+ escore +"</div><div class='score-nd'><strong>ND:</strong> "+ nd +"</div></div></div>");
+                        }
+                    }); 
+                });
+            }
+            // runResults();
+            setInterval(runResults,1000);
+        </script>
+    </body>
+</html>

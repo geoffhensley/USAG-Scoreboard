@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<scoring>
+   <events>
+      <event eventnum="1" title="FLOOR" num="1000" name="Christiane Popovich" gym="Jedi" score="16.250" dscore="6.50" escore="9.850" bonus="0.100" nd="-0.1" />
+      <event eventnum="2" title="POMMEL" num="2000" name="Taylor Christopulos" gym="General" score="16.000" dscore="6.60" escore="9.400" bonus="0.200" nd="0.0" />
+      <event eventnum="3" title="RINGS" num="3000" name="Donnell Whittenberg" gym="Lord" score="15.525" dscore="5.80" escore="9.725" bonus="0.300" nd="0.0" />
+      <event eventnum="4" title="VAULT" num="4000" name="Levi Jung-Ruivivar" gym="Smuggler" score="15.475" dscore="6.10" escore="9.675" bonus="0.400" nd="-0.3" />
+      <event eventnum="5" title="P BARS" num="5000" name="Obi-Wan Kenobi" gym="Master" score="15.325" dscore="5.90" escore="9.425" bonus="0.500" nd="0.0" />
+      <event eventnum="6" title="H BAR" num="6000" name="R2 D2" gym="Droid" score="15.100" dscore="5.70" escore="9.400" bonus="0.600" nd="0.0" />
+   </events>
+   <leaders>
+      <leader leadernum="1" title1="Leader 1" title2="FLOOR" >
+         <line linenum="1" rank="1" name="Aderlynn Westerman" gym="Jedi" score="16.250" />
+         <line linenum="2" rank="2" name="Donnell Whittenberg" gym="General" score="16.000" />
+         <line linenum="3" rank="3" name="Darth Vader" gym="Lord" score="15.525" />
+         <line linenum="4" rank="4" name="Han Solo" gym="Smuggler" score="15.475" />
+         <line linenum="5" rank="5" name="Obi-Wan Kenobi" gym="Master" score="15.325" />
+         <line linenum="6" rank="6" name="R2 D2" gym="Droid" score="15.100" />
+         <line linenum="7" rank="7" name="Kylo Ren" gym="Sith" score="15.000" />
+         <line linenum="8" rank="8" name="C3 PO" gym="Cyborg" score="14.875" />
+      </leader>
+      <leader leadernum="2" title1="Leader 2" title2="AA" >
+         <line linenum="1" rank="1" name="Luke Skywalker" gym="Jedi" score="63.225" />
+         <line linenum="2" rank="2" name="Princess Leia" gym="General" score="63.150" />
+         <line linenum="3" rank="3" name="Darth Vader" gym="Lord" score="62.875" />
+         <line linenum="4" rank="4" name="Han Solo" gym="Smuggler" score="61.950" />
+         <line linenum="5" rank="5" name="Obi-Wan Kenobi" gym="Master" score="61.300" />
+         <line linenum="6" rank="6" name="R2 D2" gym="Droid" score="61.000" />
+         <line linenum="7" rank="7" name="Kylo Ren" gym="Sith" score="60.645" />
+         <line linenum="8" rank="8" name="C3 PO" gym="Cyborg" score="60.150" />
+      </leader>
+      <leader leadernum="3" title1="Leader 3" title2="FLOOR" >
+         <line linenum="1" rank="1" name="Luke Skywalker" gym="Jedi" score="16.250" />
+         <line linenum="2" rank="2" name="Princess Leia" gym="General" score="16.000" />
+         <line linenum="3" rank="3" name="Darth Vader" gym="Lord" score="15.525" />
+         <line linenum="4" rank="4" name="Han Solo" gym="Smuggler" score="15.475" />
+         <line linenum="5" rank="5" name="Obi-Wan Kenobi" gym="Master" score="15.325" />
+         <line linenum="6" rank="6" name="R2 D2" gym="Droid" score="15.100" />
+         <line linenum="7" rank="7" name="Kylo Ren" gym="Sith" score="15.000" />
+         <line linenum="8" rank="8" name="C3 PO" gym="Cyborg" score="14.875" />
+      </leader>
+   </leaders>
+   <ncaacycle team="Team ProScore" event="FLOOR" eventscore="63.250" teamscore="253.000" >
+      <lineup order="1" name="Luke Skywalker" score="16.250" />
+      <lineup order="2" name="Princess Leia" score="16.000" />
+      <lineup order="3" name="Darth Vader" score="15.525" />
+      <lineup order="4" name="Han Solo" score="15.475" />
+      <lineup order="5" name="Obi-Wan Kenobi" score="15.325" />
+      <lineup order="6" name="R2 D2" score="15.100" />
+   </ncaacycle>
+   <ncaamatrix evtitle1="FLOOR" evshort1="FX" evtitle2="POMMEL" evshort2="PH" evtitle3="RINGS" evshort3="SR" evtitle4="VAULT" evshort4="VT" evtitle5="P BARS" evshort5="PB" evtitle6="H BAR" evshort6="HB" >
+      <line linenum="1" rank="1" gym="Matrix Team 1" teamscore="471.875" evscore1="78.125" evscore2="78.225" evscore3="79.300" evscore4="79.550" evscore5="78.400" evscore6="78.275" />
+      <line linenum="2" rank="2" gym="Matrix Team 2" teamscore="475.525" evscore1="78.425" evscore2="80.225" evscore3="79.825" evscore4="78.675" evscore5="77.625" evscore6="80.750" />
+      <line linenum="3" rank="3" gym="Matrix Team 3" teamscore="471.800" evscore1="79.550" evscore2="77.475" evscore3="78.525" evscore4="77.650" evscore5="79.825" evscore6="78.775" />
+      <line linenum="4" rank="4" gym="Matrix Team 4" teamscore="468.550" evscore1="78.375" evscore2="77.900" evscore3="78.575" evscore4="76.700" evscore5="78.375" evscore6="78.625" />
+      <line linenum="5" rank="5" gym="Matrix Team 5" teamscore="469.100" evscore1="79.075" evscore2="76.550" evscore3="77.325" evscore4="78.525" evscore5="79.300" evscore6="78.325" />
+      <line linenum="6" rank="6" gym="Matrix Team 6" teamscore="471.800" evscore1="76.850" evscore2="78.400" evscore3="78.775" evscore4="79.450" evscore5="78.975" evscore6="79.350" />
+      <line linenum="7" rank="7" gym="Matrix Team 7" teamscore="469.075" evscore1="79.500" evscore2="76.675" evscore3="77.425" evscore4="78.350" evscore5="78.300" evscore6="78.825" />
+      <line linenum="8" rank="8" gym="Matrix Team 8" teamscore="471.550" evscore1="79.250" evscore2="78.850" evscore3="78.550" evscore4="77.800" evscore5="78.375" evscore6="78.725" />
+   </ncaamatrix>
+</scoring>
