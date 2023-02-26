@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Leaderboard</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;800&display=swap" rel="stylesheet">
+        <style>
+            :root {
+                --primary: #0857b5;
+                --secondary: #162c53;
+                --tertiary: #e61e2f;
+                --font-color: #ffffff;
+            }
+
+            html, body {
+                margin: 0;
+                overflow: hidden;
+                font-family: 'Poppins', sans-serif;
+                font-weight: 500;
+                background: black;
+            }
+            body {
+                background-image: url(./images/standings-new.jpg);
+                background-repeat: no-repeat;
+            }
+
+            /* Custom Styles */
+            .video-feed {
+                background: green;
+                width: 1485px;
+                padding-top: 56.25%;
+                top: 0;
+                left: 0;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div class="video-feed">
+
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script>
+            var activeItem = $(".events").find('.event').first();
+            var activeItemTitle = activeItem.find('.title').text();
+
+            function runResults(){
+                $.getJSON("./scripts/leaderboard.php", function(json){
+
+                    // Empty out the event list on initital refresh
+                    $(".event-list").empty();
+
+                    // Left column - Title
+                    $(".titleL").text(json[0].title1);
+                    $(".titleR").text(json[0].title2);
+
+                    // Left column - Leaderboard (8 at a time)
+                    $.each(json, function(i, item) {
+                        var leaderName = item.name;
+                        var leaderScore = item.score;
+                        var position = item.rank;
+                        var place = item.place;
+
+                        if (place) {
+                            $('.rank-' + position).text(place);
+                        } else {
+                            $('.rank-' + position).text('');
+                        }
+
+                        if(position == "1"){
+                            $(".leader1-name").text(leaderName);
+                            $(".leader1-score").text(leaderScore);
+                        }
+                        if(position == "2"){
+                            $(".leader2-name").text(leaderName);
+                            $(".leader2-score").text(leaderScore);
+                        }
+                        if(position == "3"){
+                            $(".leader3-name").text(leaderName);
+                            $(".leader3-score").text(leaderScore);
+                        }
+                        if(position == "4"){
+                            $(".leader4-name").text(leaderName);
+                            $(".leader4-score").text(leaderScore);
+                        }
+                        if(position == "5"){
+                            $(".leader5-name").text(leaderName);
+                            $(".leader5-score").text(leaderScore);
+                        }
+                        if(position == "6"){
+                            $(".leader6-name").text(leaderName);
+                            $(".leader6-score").text(leaderScore);
+                        }
+                        if(position == "7"){
+                            $(".leader7-name").text(leaderName);
+                            $(".leader7-score").text(leaderScore);
+                        }
+                        if(position == "8"){
+                            $(".leader8-name").text(leaderName);
+                            $(".leader8-score").text(leaderScore);
+                        }
+                    });
+                });       
+            }
+           // setInterval(runResults,1000);
+           // runResults();
+        </script>
+    </body>
+</html>
