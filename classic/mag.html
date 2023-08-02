@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>MAG</title>
+
+        <style>
+            @font-face {
+                font-family: "Poppins";
+                src: url("/fonts/Poppins-Regular.ttf");
+            }
+            @font-face {
+                font-family: "Poppins Bold";
+                src: url("/fonts/Poppins-Bold.ttf");
+            }
+
+            html, body {
+                margin: 0;
+            }
+            body {
+                background: black;
+                width: 1920px;
+            }
+
+            h1 {
+                font-family: 'Poppins', sans-serif;
+                font-size: 105px;
+                letter-spacing: 14px;
+                line-height: 105px;
+                text-transform: uppercase;
+                color: white;
+                margin: 0;
+            }
+            h2 {
+                display: inline-block;
+                font-family: 'Poppins Bold', sans-serif;
+                font-size: 42px;
+                font-weight: 600;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                line-height: 130%;
+                color: white;
+                margin: 0;
+                background-color: #ae2080;
+                margin: 10px 0 10px;
+                padding: 0 25px;
+                min-width: 50%;
+                min-height: 53px;
+            }
+            h3 {
+                display: inline-block;
+                font-family: 'Poppins Bold', sans-serif;
+                font-size: 28px;
+                font-weight: 600;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                line-height: 130%;
+                color: white;
+                background-color: #ae2080;
+                margin: 10px 10px;
+                padding: 0 10px;
+                min-width: 55%;
+                min-height: 1.9ch;
+            }
+            h4 {
+                display: block;
+                font-family: 'Poppins Bold', sans-serif;
+                font-size: 28px;
+                font-weight: 600;
+                letter-spacing: 2px;
+                line-height: 130%;
+                color: white;
+                margin: 0 0 12px 20px;
+                min-height: 1.9ch;
+            }
+
+            .leaderboards {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                width: 100%;
+            }
+
+            .leaderboard {
+                display: flex;
+                flex-direction: column;
+                flex-basis: 100%;
+                flex: 1;
+                padding: 8px 40px 0 25px;
+                background-repeat: no-repeat;
+            }
+                .leaderboard-aa {
+                    background-image: url("images/classic_wag__aa.jpg");
+                }
+                .leaderboard-events {
+                    background-image: url("images/classic_wag__events.jpg");
+                }
+
+            /* Leaderboard Events */
+            .leader-row {
+                display: flex;
+                flex-direction: row;
+                min-height: 42px;
+
+                font-family: 'Poppins Bold', sans-serif;
+                font-size: 28px;
+                font-weight: 800;
+                color: white;
+                margin-bottom: 5px;
+                margin-left: 25px;
+            }
+            .rank {
+                width: 1ch;
+                margin-right: 28px;
+            }
+            .leader-name {
+                flex: 1 0 0;
+            }
+
+            /* Events */
+            .ind-events-top {
+                border-top: 12px solid white;
+                border-bottom: 4px solid white;
+            }
+            .ind-events {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                width: 100%;
+                height: 100%;
+            }
+            .event {
+                background: #162c53;
+                height: 100%;
+                min-height: 230px;
+                width: 100%;
+                padding: 10px;
+                border-right: 4px solid white;
+            }
+            .event:last-of-type {
+                border-right: none;
+            }
+            .event.light {
+                background: #1f5aa9;
+            }
+
+            .event-scores {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                border-top: 2px solid #eed560;
+                border-bottom: 2px solid #eed560;
+                margin: 0 10px;
+                padding: 10px;
+            }
+            .event-score-single {
+                display: flex;
+                font-family: 'Poppins Bold', sans-serif;
+                font-size: 22px;
+                font-weight: 600;
+                letter-spacing: 2px;
+                line-height: 100%;
+                color: #39c0e0;
+            }
+            .event-score-number {
+                font-family: 'Poppins', sans-serif;
+                font-size: 60px;
+                letter-spacing: 2px;
+                line-height: 100%;
+                color: white;
+                margin: 14px 10px 6px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="leaderboards">
+            <div class="leaderboard leaderboard-aa">
+                <h1>Leaderboard</h1>
+                <div>
+                    <h2 class="aa-title"></h2>
+                </div>
+                <div class="leaders">
+                    <div class="leader-row">
+                        <div class="rank aa1-rank"></div>
+                        <div class="leader-name aa1-name"></div>
+                        <div class="score aa1-score"></div>
+                    </div>
+                    <div class="leader-row">
+                        <div class="rank aa2-rank"></div>
+                        <div class="leader-name aa2-name"></div>
+                        <div class="score aa2-score"></div>
+                    </div>
+                    <div class="leader-row">
+                        <div class="rank aa3-rank"></div>
+                        <div class="leader-name aa3-name"></div>
+                        <div class="score aa3-score"></div>
+                    </div>
+                    <div class="leader-row">
+                        <div class="rank aa4-rank"></div>
+                        <div class="leader-name aa4-name"></div>
+                        <div class="score aa4-score"></div>
+                    </div>
+                    <div class="leader-row">
+                        <div class="rank aa5-rank"></div>
+                        <div class="leader-name aa5-name"></div>
+                        <div class="score aa5-score"></div>
+                    </div>
+                    <div class="leader-row">
+                        <div class="rank aa6-rank"></div>
+                        <div class="leader-name aa6-name"></div>
+                        <div class="score aa6-score"></div>
+                    </div>
+                    <div class="leader-row">
+                        <div class="rank aa7-rank"></div>
+                        <div class="leader-name aa7-name"></div>
+                        <div class="score aa7-score"></div>
+                    </div>
+                    <div class="leader-row">
+                        <div class="rank aa8-rank"></div>
+                        <div class="leader-name aa8-name"></div>
+                        <div class="score aa8-score"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="leaderboard leaderboard-events">
+                <h1>Leaderboard</h1>
+                <div>
+                    <h2 class="events-title"></h2>
+                </div>
+                <div class="leaders">
+                    <div class="leader-row">
+                        <div class="rank event1-rank"></div>
+                        <div class="leader-name event1-name"></div>
+                        <div class="score event1-score"></div>
+                    </div>
+                    <div class="leader-row">
+                        <div class="rank event2-rank"></div>
+                        <div class="leader-name event2-name"></div>
+                        <div class="score event2-score"></div>
+                    </div>
+                    <div class="leader-row">
+                        <div class="rank event3-rank"></div>
+                        <div class="leader-name event3-name"></div>
+                        <div class="score event3-score"></div>
+                    </div>
+                    <div class="leader-row">
+                        <div class="rank event4-rank"></div>
+                        <div class="leader-name event4-name"></div>
+                        <div class="score event4-score"></div>
+                    </div>
+                    <div class="leader-row">
+                        <div class="rank event5-rank"></div>
+                        <div class="leader-name event5-name"></div>
+                        <div class="score event5-score"></div>
+                    </div>
+                    <div class="leader-row">
+                        <div class="rank event6-rank"></div>
+                        <div class="leader-name event6-name"></div>
+                        <div class="score event6-score"></div>
+                    </div>
+                    <div class="leader-row">
+                        <div class="rank event7-rank"></div>
+                        <div class="leader-name event7-name"></div>
+                        <div class="score event7-score"></div>
+                    </div>
+                    <div class="leader-row">
+                        <div class="rank event8-rank"></div>
+                        <div class="leader-name event8-name"></div>
+                        <div class="score event8-score"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ind-events ind-events-top">
+            <div class="event">
+                <h3 class="ind1-title"></h3>
+                <h4 class="ind1-name"></h4>
+                <div class="event-scores">
+                    <div class="event-score-single">D:&nbsp;<span class="ind1-diff"></span></div>
+                    <div class="event-score-single">E:&nbsp;<span class="ind1-exec"></span></div>
+                    <div class="event-score-single">ND:&nbsp;<span class="ind1-ded"></span></div>
+                </div>
+                <div class="event-score-number ind1-score"></div>
+            </div>
+            <div class="event light">
+                <h3 class="ind2-title"></h3>
+                <h4 class="ind2-name"></h4>
+                <div class="event-scores">
+                    <div class="event-score-single">D:&nbsp;<span class="ind2-diff"></span></div>
+                    <div class="event-score-single">E:&nbsp;<span class="ind2-exec"></span></div>
+                    <div class="event-score-single">ND:&nbsp;<span class="ind2-ded"></span></div>
+                </div>
+                <div class="event-score-number ind2-score"></div>
+            </div>
+            <div class="event">
+                <h3 class="ind3-title"></h3>
+                <h4 class="ind3-name"></h4>
+                <div class="event-scores">
+                    <div class="event-score-single">D:&nbsp;<span class="ind3-diff"></span></div>
+                    <div class="event-score-single">E:&nbsp;<span class="ind3-exec"></span></div>
+                    <div class="event-score-single">ND:&nbsp;<span class="ind3-ded"></span></div>
+                </div>
+                <div class="event-score-number ind3-score"></div>
+            </div>
+        </div>
+        <div class="ind-events">
+            <div class="event light">
+                <h3 class="ind4-title"></h3>
+                <h4 class="ind4-name"></h4>
+                <div class="event-scores">
+                    <div class="event-score-single">D:&nbsp;<span class="ind4-diff"></span></div>
+                    <div class="event-score-single">E:&nbsp;<span class="ind4-exec"></span></div>
+                    <div class="event-score-single">ND:&nbsp;<span class="ind4-ded"></span></div>
+                </div>
+                <div class="event-score-number ind4-score"></div>
+            </div>
+            <div class="event">
+                <h3 class="ind5-title"></h3>
+                <h4 class="ind5-name"></h4>
+                <div class="event-scores">
+                    <div class="event-score-single">D:&nbsp;<span class="ind5-diff"></span></div>
+                    <div class="event-score-single">E:&nbsp;<span class="ind5-exec"></span></div>
+                    <div class="event-score-single">ND:&nbsp;<span class="ind5-ded"></span></div>
+                </div>
+                <div class="event-score-number ind5-score"></div>
+            </div>
+            <div class="event light">
+                <h3 class="ind6-title"></h3>
+                <h4 class="ind6-name"></h4>
+                <div class="event-scores">
+                    <div class="event-score-single">D:&nbsp;<span class="ind6-diff"></span></div>
+                    <div class="event-score-single">E:&nbsp;<span class="ind6-exec"></span></div>
+                    <div class="event-score-single">ND:&nbsp;<span class="ind6-ded"></span></div>
+                </div>
+                <div class="event-score-number ind6-score"></div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script>
+            var activeItem = $(".events").find('.event').first();
+            var activeItemTitle = activeItem.find('.title').text();
+
+            function runResults(){
+                $.getJSON("./scripts/leaderboard.php", function(json){
+                    $.each(json, function(i, item) {
+                        var name = item.name;
+                        var score = item.score;
+                        var position = item.rank;
+                        var place = item.place;
+
+                        // Leaderboard All-Around (8 at a time)
+                        if (place) {
+                            $('.aa' + position + '-rank').text(place);
+                        } else { // If no place is put into the DB, make it empty
+                            $('.aa' + position + '-rank').text('');
+                        }
+                        $(".aa" + position + "-name").text(name);
+                        $(".aa" + position + "-score").text(score);
+
+
+                        // Individual App Title
+                        if(item.rank == "1") {
+                            $(".events-title").text(json[0].title2);
+                        }
+
+                        // Ind App Rotation (8 at a time)
+                        $(".event" + position + "-rank").text(position);
+                        $(".event" + position + "-name").text(name);
+                        $(".event" + position + "-score").text(score);
+                    });
+                });
+
+                /* Individual Apps */
+                $.getJSON("./scripts/scoreboard.php", function(json){
+                    $.each(json, function(i, item) {
+                        var bonus = item.bonus;
+                        var deduction = item.deduction;
+                        var difficulty = item.difficulty;
+                        var event = item.event;
+                        var execution = item.execution;
+                        var level = item.level;
+                        var name = item.name;
+                        var position = item.position;
+                        var program = item.program;
+                        var total = item.total;
+
+
+                        $(".ind" + position + "-title").text(event);
+                        $(".ind" + position + "-name").text(name);
+                        $(".ind" + position + "-score").text(total);
+                        $(".ind" + position + "-diff").text(difficulty);
+                        $(".ind" + position + "-exec").text(execution);
+                        $(".ind" + position + "-ded").text(deduction);
+                    });
+                });
+            }
+           // setInterval(runResults,1000);
+           runResults();
+        </script>
+    </body>
+</html>
