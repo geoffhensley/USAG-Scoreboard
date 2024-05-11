@@ -286,8 +286,8 @@ h1 {
 }
 
 .fop-headshot-wrapper {
-  height: 300px;
-  max-height: 300px;
+  height: 280px;
+  max-height: 280px;
   object-fit: cover;
   border: 4px solid #fff;
   overflow: hidden;
@@ -384,7 +384,8 @@ h1 {
 .gym-act-wrapper {
   width: 1920px;
   height: 1080px;
-  background-image: url('../images/GymACTBG_v9_line.jpg');
+  background: #162C53;
+  background-image: url('../images/GymActBG_24_v1.jpg');
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: 1920px 1080px;
@@ -394,10 +395,22 @@ h1 {
 .gym-act-top-bar {
   width: 100%;
   height: 180px;
+  grid-column-gap: 12px;
+  grid-row-gap: 12px;
+  padding-bottom: 20px;
+  display: flex;
+  position: absolute;
+  top: 0;
+  position: relative;
+}
+
+.gym-act-top-bar__inside {
+  width: 100%;
+  height: 180px;
   grid-column-gap: 16px;
   grid-row-gap: 16px;
   grid-template-rows: auto;
-  grid-template-columns: minmax(300px, 300px) minmax(300px, 300px) minmax(300px, 300px) minmax(300px, 300px) minmax(300px, 300px) minmax(300px, 300px);
+  grid-template-columns: minmax(24px, 0px) minmax(280px, 280px) minmax(280px, 280px) minmax(280px, 280px);
   grid-auto-columns: 1fr;
   align-items: center;
   justify-items: stretch;
@@ -407,6 +420,34 @@ h1 {
   display: grid;
   position: absolute;
   top: 0;
+  position: relative;
+}
+
+.gym-act-division-title {
+  color: #B3CBDF;
+  margin-top: 0;
+  font-family: Poppins, sans-serif;
+  font-size: 22px;
+  transform: rotate(-90deg);
+  text-transform: uppercase;
+  width: 200px;
+  margin-top: -58px;
+  margin-left: -90px;
+  z-index: 5;
+}
+
+.gym-act-division-title__alt {
+  color: #162C53;
+}
+
+.gym-act-top-bar__divider {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 50%;
+  background: #B3CBDF;
+  z-index: 1;
 }
 
 .two-column {
@@ -415,6 +456,7 @@ h1 {
   grid-row-gap: 12px;
   padding-bottom: 20px;
   display: flex;
+  z-index: 5;
 }
 
 .gym-act-team-info {
@@ -427,7 +469,7 @@ h1 {
 .team-name {
   width: 100%;
   min-height: 6ch;
-  color: #162c53;
+  color: #fff;
   flex-direction: column;
   justify-content: center;
   margin-bottom: 8px;
@@ -437,8 +479,12 @@ h1 {
   display: flex;
 }
 
+.alt .team-name {
+  color: #162C53;
+}
+
 .team-score {
-  color: #162c53;
+  color: #E61E21;
   margin-bottom: 0;
   font-size: 28px;
   font-weight: 800;
@@ -446,9 +492,11 @@ h1 {
 }
 
 .team-icon {
-  width: 120px;
+  width: 114px;
   height: auto;
-  max-width: 120px;
+  max-width: 115px;
+  background-color: #fff;
+  border-radius:200px;
 }
 
 .team-icon-wrapper {
@@ -479,7 +527,7 @@ h1 {
 }
 
 .gym-act-app-title {
-  color: #005da8;
+  color: #B3CBDF;
   margin-top: 0;
   font-family: Montserrat, sans-serif;
   font-size: 22px;
@@ -495,14 +543,14 @@ h1 {
 }
 
 .gym-act-app-athlete {
-  color: #152d53;
+  color: #fff;
   margin-top: 0;
   font-family: Poppins, sans-serif;
   font-size: 24px;
 }
 
 .gym-act-app-score {
-  color: #e62030;
+  color: #E61E21;
   margin-top: 0;
   margin-bottom: 0;
   font-family: Montserrat, sans-serif;

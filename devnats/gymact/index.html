@@ -1,9 +1,8 @@
-<!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
-<!--  Last Published: Sat May 13 2023 14:04:15 GMT+0000 (Coordinated Universal Time)  -->
+<!DOCTYPE html>
 <html data-wf-page="645f8d27159a448158f4bcce" data-wf-site="63f4c643b3d84f4346abe337">
 <head>
   <meta charset="utf-8">
-  <title>Gym Act 2023</title>
+  <title>Gym Act 2024</title>
   <meta content="Gym Act 2023" property="og:title">
   <meta content="Gym Act 2023" property="twitter:title">
   <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -23,46 +22,53 @@
 <body class="body">
   <div class="gym-act-wrapper">
     <div class="gym-act-top-bar">
-      <div id="team-1" class="two-column">
-        <div class="team-icon-wrapper"><img src="" loading="lazy" alt="" class="team-icon"></div>
-        <div class="gym-act-team-info">
-          <h3 class="team-name"></h3>
-          <p class="team-score"></p>
+      <div class="gym-act-top-bar__divider"></div>
+      <div class="gym-act-top-bar__inside">
+        <h3 class="gym-act-division-title">Large team</h3>
+        <div id="team-1" class="two-column">
+          <div class="team-icon-wrapper"><img src="" loading="lazy" alt="" class="team-icon"></div>
+          <div class="gym-act-team-info">
+            <h3 class="team-name"></h3>
+            <p class="team-score"></p>
+          </div>
+        </div>
+        <div id="team-2" class="two-column">
+          <div class="team-icon-wrapper"><img src="" loading="lazy" alt="" class="team-icon"></div>
+          <div class="gym-act-team-info">
+            <h3 class="team-name"></h3>
+            <p class="team-score"></p>
+          </div>
+        </div>
+        <div id="team-3" class="two-column">
+          <div class="team-icon-wrapper"><img src="" loading="lazy" alt="" class="team-icon"></div>
+          <div class="gym-act-team-info">
+            <h3 class="team-name"></h3>
+            <p class="team-score"></p>
+          </div>
         </div>
       </div>
-      <div id="team-2" class="two-column">
-        <div class="team-icon-wrapper"><img src="" loading="lazy" alt="" class="team-icon"></div>
-        <div class="gym-act-team-info">
-          <h3 class="team-name"></h3>
-          <p class="team-score"></p>
+      <div class="gym-act-top-bar__inside alt">
+        <h3 class="gym-act-division-title gym-act-division-title__alt">Small team</h3>
+        <div id="team-alt-1" class="two-column">
+          <div class="team-icon-wrapper"><img src="" loading="lazy" alt="" class="team-icon"></div>
+          <div class="gym-act-team-info">
+            <h3 class="team-name"></h3>
+            <p class="team-score"></p>
+          </div>
         </div>
-      </div>
-      <div id="team-3" class="two-column">
-        <div class="team-icon-wrapper"><img src="" loading="lazy" alt="" class="team-icon"></div>
-        <div class="gym-act-team-info">
-          <h3 class="team-name"></h3>
-          <p class="team-score"></p>
+        <div id="team-alt-2" class="two-column">
+          <div class="team-icon-wrapper"><img src="" loading="lazy" alt="" class="team-icon"></div>
+          <div class="gym-act-team-info">
+            <h3 class="team-name"></h3>
+            <p class="team-score"></p>
+          </div>
         </div>
-      </div>
-      <div id="team-4" class="two-column">
-        <div class="team-icon-wrapper"><img src="" loading="lazy" alt="" class="team-icon"></div>
-        <div class="gym-act-team-info">
-          <h3 class="team-name"></h3>
-          <p class="team-score"></p>
-        </div>
-      </div>
-      <div id="team-5" class="two-column">
-        <div class="team-icon-wrapper"><img src="" loading="lazy" alt="" class="team-icon"></div>
-        <div class="gym-act-team-info">
-          <h3 class="team-name"></h3>
-          <p class="team-score"></p>
-        </div>
-      </div>
-      <div id="team-6" class="two-column">
-        <div class="team-icon-wrapper"><img src="" loading="lazy" alt="" class="team-icon"></div>
-        <div class="gym-act-team-info">
-          <h3 class="team-name"></h3>
-          <p class="team-score"></p>
+        <div id="team-alt-3" class="two-column">
+          <div class="team-icon-wrapper"><img src="" loading="lazy" alt="" class="team-icon"></div>
+          <div class="gym-act-team-info">
+            <h3 class="team-name"></h3>
+            <p class="team-score"></p>
+          </div>
         </div>
       </div>
     </div>
@@ -109,132 +115,140 @@
     // runResults();
 
     function runResults(){
-    /* Individual Apps */
-    $.getJSON("./scripts/scoreboard.php?d=M", function(json){
-        $.each(json, function(i, item) {
-          var bonus = item.bonus;
-          var deduction = item.deduction;
-          var difficulty = item.difficulty;
-          var event = item.event;
-          var execution = item.execution;
-          var level = item.level;
-          var nameRaw = parseName(item.name);
-          var name = null;
-          if (nameRaw.name != null || nameRaw.name != undefined) { 
-            var name = nameRaw.name + "<br>" + nameRaw.lastName + "&nbsp;" + nameRaw.secondLastName;
-          }
-          var position = item.position;
-          var program = item.program;
-          var total = item.total;
+      $.ajax({
+          type: "GET" ,
+          url: "./../../Dropbox/Dev Nationals Scoring/Sample1.xml" ,
+          cache: false,
+          dataType: "xml" ,
+          success: function(xml) {
 
-          if(event == "FLOOR"){
-            if (total != null || total != "") { 
-              $("#fx-score").text(total);
-            } else {
-              $("#fx-score").text("");
-            }
-            if (name != null || name != "") { 
-              $("#fx-name").html(name);
-            } else {
-              $("#fx-name").text("");
-            }
-          }
-          if(event == "POMMEL"){
-            if (total != null || total != "") { 
-              $("#ph-score").text(total);
-            } else {
-              $("#ph-score").text("");
-            }
-            if (name != null || name != "") { 
-              $("#ph-name").html(name);
-            } else {
-              $("#ph-name").text("");
-            }
-          }
-          if(event == "RINGS"){
-            if (total != null || total != "") { 
-              $("#sr-score").text(total);
-            } else {
-              $("#sr-score").text("");
-            }
-            if (name != null || name != "") { 
-              $("#sr-name").html(name);
-            } else {
-              $("#sr-name").text("");
-            }
-          }
-          if(event == "VAULT"){
-            if (total != null || total != "") { 
-              $("#vt-score").text(total);
-            } else {
-              $("#vt-score").text("");
-            }
-            if (name != null || name != "") { 
-              $("#vt-name").html(name);
-            } else {
-              $("#vt-name").text("");
-            }
-          }
-          if(event == "P BARS"){
-            if (total != null || total != "") { 
-              $("#pb-score").text(total);
-            } else {
-              $("#pb-score").text("");
-            }
-            if (name != null || name != "") { 
-              $("#pb-name").html( name);
-            } else {
-              $("#pb-name").text("");
-            }
-          }
-          if(event == "H BAR"){
-            if (total != null || total != "") { 
-              $("#hb-score").text(total);
-            } else {
-              $("#hb-score").text("");
-            }
-            if (name != null || name != "") { 
-              $("#hb-name").html(name);
-            } else {
-              $("#hb-name").text("");
-            }
-          }
-        });
-    });
+            /* Individual App */
+            $(xml).find('event').each(function(){
+                var event = $(this).attr('title');
+                var nameAttr = $(this).attr('name');
+                var nameRaw = parseName(nameAttr);
+                var name = null;
+                if (nameRaw.name != null || nameRaw.name != undefined) { 
+                  var name = nameRaw.name + "<br>" + nameRaw.lastName + "&nbsp;" + nameRaw.secondLastName;
+                }
+                var total = $(this).attr('score');
 
-    // Team Scores
-    $.getJSON("./scripts/teamscores.php?m=gact23&ses=1", function(json){
-      $.each(json, function(i, item) {
-        var rank = item.rank;
-        var team = item.name;
-        var score = item.total;
+                if(event == "FLOOR"){
+                  if (total != null || total != "") { 
+                    $("#fx-score").text(total);
+                  } else {
+                    $("#fx-score").text("");
+                  }
+                  if (name != null || name != "") { 
+                    $("#fx-name").html(name);
+                  } else {
+                    $("#fx-name").text("");
+                  }
+                }
+                if(event == "POMMEL"){
+                  if (total != null || total != "") { 
+                    $("#ph-score").text(total);
+                  } else {
+                    $("#ph-score").text("");
+                  }
+                  if (name != null || name != "") { 
+                    $("#ph-name").html(name);
+                  } else {
+                    $("#ph-name").text("");
+                  }
+                }
+                if(event == "RINGS"){
+                  if (total != null || total != "") { 
+                    $("#sr-score").text(total);
+                  } else {
+                    $("#sr-score").text("");
+                  }
+                  if (name != null || name != "") { 
+                    $("#sr-name").html(name);
+                  } else {
+                    $("#sr-name").text("");
+                  }
+                }
+                if(event == "VAULT"){
+                  if (total != null || total != "") { 
+                    $("#vt-score").text(total);
+                  } else {
+                    $("#vt-score").text("");
+                  }
+                  if (name != null || name != "") { 
+                    $("#vt-name").html(name);
+                  } else {
+                    $("#vt-name").text("");
+                  }
+                }
+                if(event == "P BARS"){
+                  if (total != null || total != "") { 
+                    $("#pb-score").text(total);
+                  } else {
+                    $("#pb-score").text("");
+                  }
+                  if (name != null || name != "") { 
+                    $("#pb-name").html( name);
+                  } else {
+                    $("#pb-name").text("");
+                  }
+                }
+                if(event == "H BAR"){
+                  if (total != null || total != "") { 
+                    $("#hb-score").text(total);
+                  } else {
+                    $("#hb-score").text("");
+                  }
+                  if (name != null || name != "") { 
+                    $("#hb-name").html(name);
+                  } else {
+                    $("#hb-name").text("");
+                  }
+                }
+            });  
+          
+            // Team Scores
+            $(xml).find('ncaamatrix').each(function(e){
+              $(this).find('line').each(function(){
+                var rank = $(this).attr('linenum');
+                var team = $(this).attr('gym');
+                var score = $(this).attr('teamscore');
 
-        teamUpdate(team, rank, score);
+                teamUpdate(team, rank, score);
+              });
+            });
+          }
       });
-    });
 }
 
 function teamUpdate(team, rank, score) {
     if (team == null || team == undefined || team == "") { 
-      $("#team-" + rank).find('.team-icon').attr("src", "");
-      $("#team-" + rank).find('.team-name').text("").css('color', '#000000');
-      $("#team-" + rank).find('.team-score').text("").css('color', '#000000');
+      // $("#team-" + rank).find('.team-icon').attr("src", "");
+      // $("#team-" + rank).find('.team-name').text("").css('color', '#ffffff');
+      // $("#team-" + rank).find('.team-score').text("").css('color', '#ffffff');
 
       return;
     }
     var teamDeets = teamCodes(team);
 
     if (teamDeets === false) {
-      $("#team-" + rank).find('.team-icon').attr("src", "");
-      $("#team-" + rank).find('.team-name').text("").css('color', '#000000');
-      $("#team-" + rank).find('.team-score').text("").css('color', '#000000');
+      // $("#team-" + rank).find('.team-icon').attr("src", "");
+      // $("#team-" + rank).find('.team-name').text("").css('color', '#ffffff');
+      // $("#team-" + rank).find('.team-score').text("").css('color', '#ffffff');
 
       return;
     }
 
-    $("#team-" + rank).find('.team-icon').attr("src", "./images/logos/" + teamDeets.logo);
-    $("#team-" + rank).find('.team-name').text(teamDeets.title).css('color', teamDeets.primary);
-    $("#team-" + rank).find('.team-score').text(score).css('color', teamDeets.secondary);
+    if (teamDeets.division == 2) {
+      console.log(team);
+      $("#team-alt-" + rank).find('.team-icon').attr("src", "./images/logos/" + teamDeets.logo);
+      $("#team-alt-" + rank).find('.team-name').text(teamDeets.title);
+      $("#team-alt-" + rank).find('.team-score').text(score);
+    } else {
+      $("#team-" + rank).find('.team-icon').attr("src", "./images/logos/" + teamDeets.logo);
+      $("#team-" + rank).find('.team-name').text(teamDeets.title);
+      $("#team-" + rank).find('.team-score').text(score);
+    }
   }
 
   function teamCodes(team) {
@@ -243,9 +257,10 @@ function teamUpdate(team, rank, score) {
     // Arizona State Gymnastics
     if (team == "Arizona State") {
       result.primary = "#640000";
-      result.secondary = "#000000";
+      result.secondary = "#ffffff";
       result.title = "Arizona State Gymnastics";
       result.logo = "as.png";
+      result.division = 1;
     }
 
     // Georgia United
@@ -254,6 +269,7 @@ function teamUpdate(team, rank, score) {
       result.secondary = "#212C64";
       result.title = "Georgia United";
       result.logo = "gu.png";
+      result.division = 2;
     }
 
     // Iowa
@@ -262,6 +278,7 @@ function teamUpdate(team, rank, score) {
       result.secondary = "#333";
       result.title = "Iowa";
       result.logo = "ia.png";
+      result.division = 1;
     }
 
     // Kansas City United
@@ -270,6 +287,7 @@ function teamUpdate(team, rank, score) {
       result.secondary = "#333";
       result.title = "Kansas City United";
       result.logo = "kc.png";
+      result.division = 2;
     }
 
     // Minnesota
@@ -278,14 +296,16 @@ function teamUpdate(team, rank, score) {
       result.secondary = "#3D0114";
       result.title = "Minnesota";
       result.logo = "mg.png";
+      result.division = 1;
     }
 
     // Northern Illinois University 
     else if (team == "NIU") {
-      result.primary = "#000000";
+      result.primary = "#ffffff";
       result.secondary = "#CF152D";
       result.title = "Northern Illinois University";
       result.logo = "ni.png";
+      result.division = 1;
     }
 
     // New York Alliance
@@ -294,14 +314,16 @@ function teamUpdate(team, rank, score) {
       result.secondary = "#F7662F";
       result.title = "New York Alliance";
       result.logo = "ny.png";
+      result.division = 1;
     }
 
     // Bay Area Bandits
     else if (team == "Bay Area Bandits") {
-      result.primary = "#000000";
+      result.primary = "#ffffff";
       result.secondary = "#ED1C24";
       result.title = "Bay Area Bandits";
       result.logo = "bb.png";
+      result.division = 1;
     }
 
     // Rocky Mountain Mavericks
@@ -310,6 +332,7 @@ function teamUpdate(team, rank, score) {
       result.secondary = "#F16822";
       result.title = "Rocky Mountain Mavericks";
       result.logo = "rm.png";
+      result.division = 1;
     }
 
     // SC United
@@ -318,30 +341,34 @@ function teamUpdate(team, rank, score) {
       result.secondary = "#1B1B1D";
       result.title = "SC United";
       result.logo = "sc.png";
+      result.division = 1;
     }
 
     // Temple University
     else if (team == "Temple") {
-      result.primary = "#000000";
+      result.primary = "#ffffff";
       result.secondary = "#9E1B34";
       result.title = "Temple University";
       result.logo = "tu.png";
+      result.division = 1;
     }
 
     // Texas Armadillos
     else if (team == "Texas Armadillos") {
-      result.primary = "#000000";
+      result.primary = "#ffffff";
       result.secondary = "#CA2B1E";
-      result.title = "Texas";
+      result.title = "Texas Armadillos";
       result.logo = "tx.png";
+      result.division = 2;
     }
 
     // University of Illinois at Chicago
     else if (team == "UIC") {
-      result.primary = "#000000";
+      result.primary = "#ffffff";
       result.secondary = "#CA2B1E";
       result.title = "University of Illinois at Chicago";
       result.logo = "uc.png";
+      result.division = 1;
     }
 
     // Washington Men’s Gymnastics
@@ -350,6 +377,25 @@ function teamUpdate(team, rank, score) {
       result.secondary = "#3C2D70";
       result.title = "Washington Men’s Gymnastics";
       result.logo = "wm.png";
+      result.division = 1;
+    }
+
+    // Florida Storm
+    else if (team == "FL Storm") {
+      result.primary = "#0F034E";
+      result.secondary = "#FCB040";
+      result.title = "Florida Storm";
+      result.logo = "fs.png";
+      result.division = 2;
+    }
+
+    // Indy-Hio
+    else if (team == "Indy-Hio") {
+      result.primary = "#D4FA96";
+      result.secondary = "#030303";
+      result.title = "Indy-Hio Hyenas";
+      result.logo = "ih.png";
+      result.division = 1;
     }
 
     else {
