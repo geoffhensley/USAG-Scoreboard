@@ -1,0 +1,510 @@
+<!--
+
+    To use this page:
+    There are required parameters that must be applied:
+    ?m=usa24w&s=2W&p=W&a=fx
+
+    m=[Meet ID]
+    s=[Session ID]
+    p=[Program (M/W)]
+    a=[Apparatus]
+
+-->
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>OFD</title>
+
+        <style>
+            @font-face {
+                font-family: "Mont Heavy";
+                src: url("./fonts/Mont Heavy.otf");
+            }
+            @font-face {
+                font-family: "Poppins";
+                src: url("./fonts/Poppins-Regular.ttf");
+            }
+            @font-face {
+                font-family: "Poppins Bold";
+                src: url("./fonts/Poppins-Bold.ttf");
+            }
+
+            html, body {
+                margin: 0;
+                font-family: "Mont Heavy";
+            }
+            body {
+                background: #081454;
+                background-image: url("images/background.jpg");
+                background-repeat: no-repeat;
+                width: 1248px;
+                overflow: hidden;
+            }
+            #background-video {
+                width: 100vw;
+                height: 100vh;
+                object-fit: cover;
+                position: fixed;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                z-index: -1;
+            }
+
+            h1 {
+                color: #fff;
+                text-transform: uppercase;
+                margin-bottom: 10px;
+                font-size: 96px;
+                font-weight: 700;
+                line-height: 1;
+                display: inline;
+            }
+            h2 {
+                color: #fff;
+                text-transform: uppercase;
+                margin-top: 20px;
+                margin-bottom: 10px;
+                font-size: 72px;
+                font-weight: 700;
+                line-height: 28px;
+            }
+            h3 {
+                color: #fff;
+                text-transform: uppercase;
+                margin-top: 0px;
+                margin-bottom: 10px;
+                font-size: 58px;
+                font-weight: 700;
+                line-height: 1.2;
+            }
+
+            .heading {
+                font-size: 55px;
+                line-height: 1;
+            }
+            .hide {
+                display: none;
+            }
+
+
+            .main-wrapper {
+                flex: 1;
+                align-items: flex-start;
+                display: flex;
+            }
+            .main-content {
+                height: 100%;
+                outline-offset: 0px;
+                flex-direction: column;
+                flex: 1;
+                display: flex;
+                overflow: auto;
+            }
+
+            /* Athlete */
+            .athlete-wrapper {
+                justify-content: space-between;
+                display: flex;
+                align-items: flex-end;
+            }
+            .athlete {
+                height: 679px;
+                flex-grow: 1;
+                z-index: 10;
+                padding-top: 1rem;
+                padding-left: 2rem;
+                padding-bottom: 2rem;
+                max-width: 580px;
+            }
+            .athlete-info {
+                display: flex;
+                align-items: center;
+                height: 100%;
+                flex: 1;
+            }
+            .athlete-name {
+                padding: 2rem;
+                padding-top: 66px;
+                padding-bottom: 1rem;
+                display: inline-block;
+                z-index: 10;
+                height: 10ch;
+            }
+            .athlete-name-inside {
+                margin-top: 0;
+                display: inline;
+                word-break: break-word;
+            }
+            .athlete-scores {
+                flex-direction: column;
+                justify-content: space-between;
+                padding-left: 2rem;
+                padding-right: 2rem;
+                display: flex;
+            }
+            .athlete-image-wrapper {
+                flex: 1;
+                border:0;
+                position: relative;
+                margin-bottom: -5px;
+                text-align: right;
+            }
+            .athlete-image {
+                height: 100%;
+                object-fit: cover;
+                object-position: 50% 50%;
+                filter: grayscale(1);
+            }
+            .athlete-image-overlay {
+                position: absolute;
+                z-index: 5;
+                top: 0px;
+                left: 0px;
+                width: 100%;
+                height: 100%;
+                background: url(images/background_blue_overlay.png), lightgray 50% / cover no-repeat;
+                mix-blend-mode: soft-light;
+            }
+
+            /* Scores */
+            .athlete-score-block {
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                flex: 1 1;
+            }
+            .athlete-score-block div {
+                flex: 1 1;
+            }
+            .athlete-total-score {
+                grid-column-gap: 1rem;
+                grid-row-gap: 1rem;
+                text-align: center;
+                padding-left: 2rem;
+                padding-right: 2rem;
+                display: flex;
+            }
+            .athlete-total-score > h1 {
+                margin-top: 0;
+                margin-bottom: 0;
+                display: block;
+                font-size: 86px;
+            }
+
+            /* Apparatus */
+            .apparatus {
+                width: 100%;
+                padding-bottom: 66px;
+                z-index: 10;
+            }
+            .apparatus-title {
+                width: 100%;
+                padding-left: 2rem;
+            }
+            .apparatus-title-underscore {
+                border-bottom: 3px solid #fff;
+                display: inline-block;
+                font-size: 96px;
+            }
+            .apparatus-scores {
+                margin-top: 2rem;
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+            .apparatus-score-individual {
+                grid-column-gap: 1rem;
+                grid-row-gap: 1rem;
+                grid-template-rows: auto;
+                grid-template-columns: minmax(0, 90px) 4fr 1fr;
+                grid-auto-columns: 1fr;
+                justify-content: flex-start;
+                display: grid;
+            }
+            .apparatus-score-individual > h2:nth-child(3) {
+                text-align: right;
+            }
+
+            .offline {
+                display: none;
+                position: absolute;
+                bottom: 88px;
+                margin: 0 auto;
+                width: 100%;
+                text-align: center;
+            }
+            .cover {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: 50% 50%;
+                max-width: 750px;
+                margin-top: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- <video id="background-video" autoplay loop muted poster="images/background.png">
+            <source src="images/background.mp4" type="video/mp4">
+        </video> -->
+        <div class="main-wrapper">
+            <div class="athlete-image-overlay"></div>
+            <div class="main-content">
+                <div class="apparatus">
+                    <div class="apparatus-title">
+                        <h1 class="apparatus-title-underscore"></h1>
+                    </div>
+                    <div class="apparatus-scores">
+                        <!--<div class="apparatus-score-individual">
+                            <h2 class="heading app-ind-heading"></h2>
+                            <h2 class="heading app-ind-name"></h2>
+                            <h2 class="heading app-ind-score"></h2>
+                        </div>-->
+                    </div>
+                </div>
+
+                <div class="offline">
+                    <img class="cover" src="../headshots/logo.png">
+                </div>
+                <div>
+                    <div class="athlete-name">
+                        <h1 class="athlete-name-inside"></h1>
+                    </div>
+                </div>
+                <div class="athlete-wrapper">
+                    <div class="athlete">
+                        <div class="athlete-total-score">
+                            <h1 class="total-score-title"></h1>
+                            <h1 class="total-score"></h1>
+                        </div>
+                        
+                        <div class="athlete-info">
+                            <div class="athlete-scores">
+                                <!-- athleteScores() -->
+                                <div class="athlete-score-block"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="athlete-image-wrapper">
+                        <img src="" loading="lazy" alt="" class="athlete-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script>
+            window.meetId = getUrlParameter('m');
+            window.sessionId = getUrlParameter('s');
+            window.apparatus = "";
+            window.globalTimeout = "";
+            wipeAthlete();
+
+            // Update Apparatus to full name
+            if (getUrlParameter('a') == 'aa'){apparatus="All Around";apparatusTitle = "All Around"}
+            else if(getUrlParameter('a') == 'vt'){apparatus="Vault";apparatusTitle = "Vault"}
+            else if (getUrlParameter('a') == 'bm'){apparatus="Beam";apparatusTitle = "Beam"}
+            else if (getUrlParameter('a') == 'ub'){apparatus="Bars";apparatusTitle = "Uneven Bars"}
+            else if (getUrlParameter('a') == 'bb'){apparatus="Beam";apparatusTitle = "Balance Beam"}
+            else if (getUrlParameter('a') == 'fx'){apparatus="Floor";apparatusTitle = "Floor"}
+            else if (getUrlParameter('a') == 'ph'){apparatus="Pommel";apparatusTitle = "Pommel Horse"}
+            else if (getUrlParameter('a') == 'sr'){apparatus="Rings";apparatusTitle = "Still Rings"}
+            else if (getUrlParameter('a') == 'pb'){apparatus="P Bars";apparatusTitle = "Parallel Bars"}
+            else if (getUrlParameter('a') == 'hb'){apparatus="H Bar";apparatusTitle = "High Bar"}
+            else if (getUrlParameter('a') == 'ba'){apparatus="Balance";apparatusTitle = "Balance"}
+            else if (getUrlParameter('a') == 'dy'){apparatus="Dynamic";apparatusTitle = "Dynamic"}
+            else if (getUrlParameter('a') == 'hp'){apparatus="Hoop";apparatusTitle = "Hoop"}
+            else if (getUrlParameter('a') == 'bl'){apparatus="Ball";apparatusTitle = "Ball"}
+            else if (getUrlParameter('a') == 'cl'){apparatus="Clubs";apparatusTitle = "Clubs"}
+            else if (getUrlParameter('a') == 'rb'){apparatus="Ribbon";apparatusTitle = "Ribbon"}
+            else if (getUrlParameter('a') == 'tu'){apparatus="Tumbling";apparatusTitle = "All Around"}
+            else if (getUrlParameter('a') == 'dm'){apparatus="Double Mini";apparatusTitle = "Double Mini"}
+            else if (getUrlParameter('a') == 'tr'){apparatus="Trampoline";apparatusTitle = "Trampoline"}
+            else if (getUrlParameter('a') == 'sy'){apparatus="Syncro";apparatusTitle = "Syncro"}
+            else if (getUrlParameter('a') == 'co'){apparatus="Combined";apparatusTitle = "Combined"}
+
+            function runResults(){
+                $.getJSON("./scripts/ofd.php?m=" + meetId + "&a=" + getUrlParameter('a') + "&p=M&ses=" + sessionId, function(result){
+                    // Set the actual JSON from the query
+                    var json = $.parseJSON(result[0].json);
+
+                    // Loop through every rotation
+                    $.each(json.rotations, function(i, rotation) {
+                        // Loops through all events inside rotation
+                        $.each(rotation.events, function(i, score) {
+                            // Find current Appartus and loop through all scores
+                            if (score.name == apparatus){
+                                // Loop through every score per athlete
+                                $.each(score.scores, function(i, athlete) {
+                                    // Skip upcoming athletes
+                                    if (athlete.status == "future") {return;}
+                                    // Show athletes who are marked on the apparatus
+                                    if (athlete.status == "competing" || athlete.status == "scoring" || athlete.status == "ready" || athlete.status == "hold" || athlete.status == "wait") {
+                                        // Sometimes data gets skipped - so we'll make sure there is info before replacing it
+                                        if(athlete.athlete.fname != ""){
+                                            pageContent['fname'] = athlete.athlete.fname.replace("* ", "");
+                                        }
+                                        if(athlete.athlete.lname != "") {
+                                            pageContent['lname'] = athlete.athlete.lname;
+                                        }
+                                        pageContent['status'] = athlete.status;
+
+                                        // Get athletes scores
+                                        athleteScores(athlete.athlete.number);
+
+                                        // Get athlete image
+                                        athleteImage(athlete.athlete.number);
+                                    } else if (athlete.status == "complete") {
+                                        // If this athlete is showing, only show for max of 30 seconds after completion
+                                        if(athlete.athlete.fname == pageContent['fname'] && pageContent['status'] != 'competing') {
+                                            console.log('wiping');
+                                            globalAthleteCount = 0;
+                                            globalTimeout = setTimeout(wipeAthlete, 30000);
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    });
+                });
+                updatedPage(pageContent);
+            }
+
+            function athleteScores(compNum) {
+                $.getJSON("./scripts/athlete.php?m=" + meetId + "&ses=" + sessionId + "&c=" + compNum, function(result){
+                    var athleteScores = [];
+                    $.each(result, function(i, scoreOutput) {
+                        if(scoreOutput.event == "AA") {
+                            pageContent['total'] = scoreOutput.total;
+                        } else {
+                            athleteScores.push("<h3>" + scoreOutput.event + ": " + scoreOutput.total + "</h3>")
+                        }
+                    });
+
+                    pageContent['indScores'] = athleteScores;
+                });
+            }
+
+            function athleteImage(compNum) {
+                photoUrl = "../headshots/" + compNum + ".png";
+                $.ajax({
+                    url: photoUrl,
+                    type: 'HEAD',
+                    error: function()
+                    {
+                        pageContent['photo'] = "";
+                    },
+                    success: function()
+                    {
+                        pageContent['photo'] = photoUrl;
+                    }
+                });
+            }
+
+            function wipeAthlete() {
+                clearTimeout(globalTimeout);
+                pageContent = [
+                    { "fname": "", "lname": "", "status": "", "total": "", "photo": "", "indScores": ""}
+                ]
+            }
+
+            // Build it!
+            setInterval(runResults,2000);
+            runResults();
+
+            // Get Current Appartus Scores
+            function getAppScores() {
+                $.getJSON("./scripts/standings.php?m=" + meetId + "&a=" + getUrlParameter('a') + "&ses=" + getUrlParameter('s') + "&p=" + getUrlParameter('p'), function(result){ 
+                    $(".apparatus-scores").html("");
+                    var apparatusScoresList = [];
+                    $.each(result, function(i, athleteReturn) {
+                        if(athleteReturn.rank != "") {
+                            apparatusScoresList.push(athleteReturn);
+                        }
+                    });
+
+                    // Workaround to ensure top score is always at top (even when multiple scores and ranks are present)
+                    console.log('orig', apparatusScoresList)
+                    // Sort by total score first
+                    apparatusScoresList.sort((a, b) => a.total > b.total ? 1 : -1);
+                    // Sort by rank (sort field)
+                    apparatusScoresList.sort((a, b) => a.sort > b.sort ? 1 : -1);
+                    console.log('new', apparatusScoresList)
+
+                    $.each(apparatusScoresList, function(i, athleteReturn) {
+                        if(athleteReturn.rank != "") {
+                            $(".apparatus-scores").append("<div class='apparatus-score-individual'><h2 class='heading app-ind-heading'>" + athleteReturn.rank + "</h2><h2 class='heading app-ind-name'>" + athleteReturn.name.replace("* ", "") + "</h2><h2 class='heading app-ind-score'>" + athleteReturn.total + "</h2></div>");
+                        }
+                    });
+                });
+            }
+
+            // Put the page together on completion of data
+            function updatedPage(pageContent) {
+                console.log('page content',pageContent);
+
+                // Athlete
+                // Total seems to be consistent
+                if (pageContent['total'] || pageContent['fname'] || pageContent['indScores']) {
+                    $(".offline").fadeOut('fast');
+                    if(pageContent['fname'] != "" && pageContent['fname'] != undefined) {
+                        $(".athlete-name-inside").html(pageContent['fname'] + "&nbsp;" + pageContent['lname']).fadeIn('fast');
+                    }
+
+                    if(pageContent['total']){
+                        $(".total-score-title").html("Total:&nbsp;&nbsp;").fadeIn('fast');
+                        $(".total-score").text(pageContent['total']).fadeIn('fast');
+                    } else {
+                        $(".total-score-title").html("&nbsp;").fadeOut('fast');
+                        $(".total-score").text(" ").fadeOut('fast');
+                    }
+                } else {
+                    $(".athlete-name-inside").html("").fadeOut('fast');
+                    $(".offline").fadeIn('fast');
+
+                    $(".total-score-title").html("&nbsp;").fadeOut('fast');
+                    $(".total-score").text(" ").fadeOut('fast');
+                }
+                if (pageContent['indScores']) {
+                    $(".athlete-score-block").html(pageContent['indScores']).fadeIn('fast');
+                } else {
+                    $(".athlete-score-block").html("").fadeOut('fast');
+                }
+                if (pageContent['photo']) {
+                    $(".athlete-image").attr("src", pageContent['photo']).removeClass('hide').fadeIn('fast');
+                } else {
+                    $(".athlete-image").attr("src", "").addClass('hide').fadeOut('fast');
+                }
+
+                // Apparatus Title
+                $(".apparatus-title-underscore").text(apparatusTitle);
+
+                // App Scores
+                getAppScores();
+           }
+
+
+           // Utility Functions
+           function getUrlParameter(sParam) {
+                var sPageURL = window.location.search.substring(1),
+                    sURLVariables = sPageURL.split('&'),
+                    sParameterName,
+                    i;
+
+                for (i = 0; i < sURLVariables.length; i++) {
+                    sParameterName = sURLVariables[i].split('=');
+
+                    if (sParameterName[0] === sParam) {
+                        return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+                    }
+                }
+                return false;
+            };
+        </script>
+    </body>
+</html>
