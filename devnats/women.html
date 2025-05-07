@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Dev Nationals Scores</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;800&family=Poppins:wght@500;800&display=swap" rel="stylesheet">
+
+        <style>
+            html, body {
+                margin: 0;
+            }
+            body {
+                background: black;
+            }
+            .bar {
+                position: absolute;
+                bottom: 0;
+                background: #b41e85;
+                width: 100%;
+                background-image: url('./images/devnats_women_bg.jpg');
+            }
+            .title {
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 800;
+                font-size: 50px;
+                line-height: 80px;
+                color: white;
+                text-transform: uppercase;
+                margin-top: -3px;
+                margin-left: 28px;
+                width: 450px;
+                padding-top: 2px;
+            }
+            .name {
+                font-family: 'Poppins', sans-serif;
+                font-size: 50px;
+                color: white;
+            }
+            .score {
+                margin-top: 4px;
+                margin-left: auto;
+                margin-right: 28px;
+                font-family: 'Poppins', sans-serif;
+                font-size: 50px;
+                color: white;
+            }
+
+            /* Events */
+            .event {
+                display: flex;
+                align-items: center;
+            }
+
+            /* Overlay */
+            .overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 99;
+            }
+            .overlay-item {
+                background: #AF007E;
+                position: absolute;
+                min-width: 260px;
+                height: 50px;
+                padding: 4px 6px;
+                font-family: 'Poppins', sans-serif;
+                color: white;
+            }
+                .overlay-vault {
+                    top: 22px;
+                    left: 30px;
+                }
+                .overlay-bars {
+                    top: 22px;
+                    left: 990px;
+                }
+                .overlay-beam {
+                    top: 564px;
+                    left: 30px;
+                }
+                .overlay-floor {
+                    top: 564px;
+                    left: 990px;
+                }
+            .overlay-title {
+                font-family: 'Montserrat', sans-serif;
+                text-transform: uppercase;
+                font-size: 14px;
+                font-weight: 700;
+            }
+            .overlay-name {
+                font-size: 22px;
+                letter-spacing: .04em;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="overlay">
+            <div class="overlay-item overlay-vault">
+                <div class="overlay-title">Now Competing:</div>
+                <div class="overlay-name"></div>
+            </div>
+            <div class="overlay-item overlay-bars">
+                <div class="overlay-title">Now Competing:</div>
+                <div class="overlay-name"></div>
+            </div>
+            <div class="overlay-item overlay-beam">
+                <div class="overlay-title">Now Competing:</div>
+                <div class="overlay-name"></div>
+            </div>
+            <div class="overlay-item overlay-floor">
+                <div class="overlay-title">Now Competing:</div>
+                <div class="overlay-name"></div>
+            </div>
+        </div>
+        <div class="bar">
+            <div class="events">
+                <div class="event vault">
+                    <div class="title">VAULT</div>
+                    <div class="name"></div>
+                    <div class="score"></div>
+                </div>
+                <div class="event bars">
+                    <div class="title">BARS</div>
+                    <div class="name"></div>
+                    <div class="score"></div>
+                </div>
+                <div class="event beam">
+                    <div class="title">BEAM</div>
+                    <div class="name"></div>
+                    <div class="score"></div>
+                </div>
+                <div class="event floor">
+                    <div class="title">FLOOR</div>
+                    <div class="name"></div>
+                    <div class="score"></div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="./js/jquery.easy-ticker.js"></script>
+        <script>
+            $('.bar').easyTicker({
+                direction: 'up',
+                easing: 'swing',
+                speed: 'slow',
+                interval: 8000,
+                height: 'auto',
+                visible: 1,
+                mousePause: false,
+                controls: {
+                    up: '',
+                    down: '',
+                    toggle: '',
+                    playText: 'Play',
+                    stopText: 'Stop'
+                },
+                callbacks: {
+                    before: false,
+                    after: function(){
+                        var activeItem = $(".events").find('.event').first();
+                        var activeItemTitle = activeItem.find('.title').text();
+
+                        $.ajax({
+                            type: "GET" ,
+                            url: "../Dropbox/Dev Nationals Scoring/Men.xml" ,
+                            cache: false,
+                            dataType: "xml" ,
+                            success: function(xml) {
+                                // Bottom ticker
+                                $(xml).find('event').each(function(){
+                                    var title = $(this).attr('title');
+                                    var name = $(this).attr('name');
+                                    var score = $(this).attr('score');
+
+                                    if (title == "VAULT" && activeItemTitle != "VAULT") {
+                                        $(".vault").find('.name').text(name);
+                                        $(".vault").find('.score').text(score);
+                                    }
+                                    if (title == "BARS" && activeItemTitle != "BARS") {
+                                        $(".bars").find('.name').text(name);
+                                        $(".bars").find('.score').text(score);
+                                    }
+                                    if (title == "BEAM" && activeItemTitle != "BEAM") {
+                                        $(".beam").find('.name').text(name);
+                                        $(".beam").find('.score').text(score);
+                                    }
+                                    if (title == "FLOOR" && activeItemTitle != "FLOOR") {
+                                        $(".floor").find('.name').text(name);
+                                        $(".floor").find('.score').text(score);
+                                    }
+                                }); 
+
+                                // Overlays
+                                $(xml).find('nowup').each(function(){
+                                    var title = $(this).attr('title');
+                                    var name = $(this).attr('name');
+                                    console.log(name);
+
+                                    if (title == "VAULT" && activeItemTitle != "VAULT") {
+                                        $(".overlay-vault").find('.overlay-name').text(name);
+                                    }
+                                    if (title == "BARS" && activeItemTitle != "BARS") {
+                                        $(".overlay-bars").find('.overlay-name').text(name);
+                                    }
+                                    if (title == "BEAM" && activeItemTitle != "BEAM") {
+                                        $(".overlay-beam").find('.overlay-name').text(name);
+                                    }
+                                    if (title == "FLOOR" && activeItemTitle != "FLOOR") {
+                                        $(".overlay-floor").find('.overlay-name').text(name);
+                                    }
+                                }); 
+                            }       
+                        });
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
